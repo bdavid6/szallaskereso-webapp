@@ -1,6 +1,6 @@
 import { Reference, wrap } from "@mikro-orm/core";
 import { Router } from "express";
-import { Accommodation, Reserved } from "../entities/Accommodation";
+import { Accommodation } from "../entities/Accommodation";
 import { Reservation } from "../entities/Reservation";
 import { Role, User } from "../entities/User";
 
@@ -13,26 +13,14 @@ accommodationRouter
         next();
     })
 
-    /*.get('/', async (req, res) => {
-        const accommodations = await req.accommodationRepository!.findAll({ populate: ['tags'] });
-        res.send(accommodations);
-    })*/
-
-    .get('/', async (req, res) => {
-        let accommodations: Accommodation[];
-
-        if (req.user!.role === Role.ADMIN) {
-            accommodations = await req.accommodationRepository!.find({ confirmed: false });
-        } else {
-            accommodations = await req.accommodationRepository!.findAll({ populate: ['tags', 'reservations'] });
-        }
-        res.send(accommodations);
-    })
-
     .get('/:id', async (req, res) => {
         const id = parseInt(req.params.id);
-        const accommodation = await req.accommodationRepository!.findOne({ id }, { populate: ['tags'] });
-        res.send(accommodation);
+        const accommodation = await req.accommodationRepository!.findOne({ id, confirmed: true });
+        if(accommodation) {
+            res.send(accommodation);
+        } else {
+            res.sendStatus(404);
+        }
     })
 
     .get('/confirm/:id', async (req, res) => {
@@ -48,7 +36,7 @@ accommodationRouter
     /*.get('/reserve/:id', async (req, res) => {
         const id = parseInt(req.params.id);
         const accommodation = await req.accommodationRepository!.findOne({ id }, { populate: ['tags', 'user'] });
-        accommodation!.reserved = Reserved.TRUE;
+        accommodation!.reserved = true;
         accommodation!.user = req.orm.em.getReference(User, req.user!.id);
         await req.accommodationRepository!.flush();
         
@@ -61,6 +49,7 @@ accommodationRouter
         const id = parseInt(req.params.id);
         const reservation = new Reservation();
 
+        //TODO: ugyanazzal a userrel ne lehessen lefoglalni ugyanazt a szállást
         wrap(reservation).assign(req.body, { em: req.orm.em });
         reservation!.user = req.orm.em.getReference(User, req.user!.id);
         reservation!.accommodation = req.orm.em.getReference(Accommodation, id);
@@ -73,7 +62,7 @@ accommodationRouter
     .delete('/:id', async (req, res) => {
         const id = parseInt(req.params.id);
         const reservation = await req.reservationRepository!.nativeDelete({ user: req.user!.id, accommodation: id });
-        if (reservation){
+        if (reservation) {
             res.sendStatus(200);
         } else {
             res.sendStatus(404);

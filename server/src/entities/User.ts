@@ -14,21 +14,15 @@ export class User {
     @Property({ hidden: true})
     password!: string;
 
-    /*@Property()
+    @Property()
     name!: string;
 
     @Property()
-    e_mail!: string;*/
+    e_mail!: string;
 
     @Enum()
     //role!: Role;
     role: Role = Role.MEMBER;
-
-    /*@Property()
-    createdAt = new Date();
-
-    @Property({ onUpdate: () => new Date() })
-    updatedAt = new Date();*/
 
     @OneToMany(() => Accommodation, accommodation => accommodation.user)
     accommodations = new Collection<Accommodation>(this);

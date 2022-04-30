@@ -8,7 +8,7 @@ export class Tag {
     id!: number;
 
     @Property()
-    text!: string;
+    filter!: string;
 
     @ManyToMany(() => Accommodation, 'tags')
     accommodations = new Collection<Accommodation>(this);

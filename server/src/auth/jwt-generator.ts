@@ -6,7 +6,7 @@ export function generateJwt(user: User) {
     const payload = {
         sub: user.id,
         role: user.role,
-        //username: user.username,
+        username: user.username,
         //name: user.name,
         //e_mail: user.e_mail,
     };

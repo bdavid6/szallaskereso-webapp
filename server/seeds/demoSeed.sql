@@ -1,1 +1,16 @@
-insert into user (username, password, role) values ('admin', '9d881c5692855840d531a51bfa58b1caf8fd34a67e3725c835473873b3fa3080a2e652e3588cb26ea0e6005cf2bcc7388ea433c8c2111d335c797d9d425a47ec', 'ADMIN');
+insert into user (username, password, name, e_mail, role) values ('admin', '9d881c5692855840d531a51bfa58b1caf8fd34a67e3725c835473873b3fa3080a2e652e3588cb26ea0e6005cf2bcc7388ea433c8c2111d335c797d9d425a47ec', 'admin', 'admin@szallaskereso', 'ADMIN');
+insert into user (username, password, name, e_mail, role) values ('member', 'cbf1653d6a367ae5541d7e017af1ab81e7e96c2676a2ee452bf3c15f954c9fa54022120e7d9a27c47ea5c1eca63383e29cf3350e0458eca7b720d17263c0228f','David', 'david@example', 'MEMBER');
+
+insert into tag (filter) values ('hotel');
+insert into tag (filter) values ('állatbarát');
+insert into tag (filter) values ('wifi');
+insert into tag (filter) values ('medence');
+
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('1', 'Elso hely', 'Elso leiras', 'Technikai leiras', 2000, 1000, false, false, 2);
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('2', 'Budapest', 'Elso leiras', 'Technikai leiras', 2000, 1000, false, false, 2);
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('3', 'Elso hely', 'Elso leiras', 'Technikai leiras', 2000, 1000, false, false, 1);
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('4', 'Budapest', 'Elso leiras', 'Technikai leiras', 2000, 1000, false, false, 1);
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('5', 'Elso hely', 'Elso leiras', 'Technikai leiras', 2000, 1000, false, false, 2);
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('6', 'Budapest', 'Elso leiras', 'Technikai leiras', 2000, 1000, false, true, 2);
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('7', 'Elso hely', 'Elso leiras', 'Technikai leiras', 2000, 1000, false, false, 1);
+insert into accommodation (name, place, description, technical_description, adult_price, child_price, reserved, confirmed, user_id) values ('8confirmed', 'confirmed', 'confirmed', 'confirmed', 2000, 1000, false, true, 1);

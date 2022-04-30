@@ -14,8 +14,8 @@ authRouter
 
     .post('/register', async (req, res) => {
         const { username, password }: AuthenticationDto = req.body;
-        /*const name: string = req.body.name;
-        const e_mail: string = req.body.e_mail;*/
+        const name: string = req.body.name;
+        const e_mail: string = req.body.e_mail;
         let user = await req.userRepository!.findOne({ username });
         if (user) {
             return res.sendStatus(409);
@@ -24,8 +24,8 @@ authRouter
         const hashedPassword = await hashPassword(password);
 
         user = new User();
-        wrap(user).assign({ username, password: hashedPassword });
-        //wrap(user).assign({ username, password: hashedPassword, name, e_mail });
+        //wrap(user).assign({ username, password: hashedPassword });
+        wrap(user).assign({ username, password: hashedPassword, name, e_mail });
         await req.userRepository!.persistAndFlush(user);
         
         return res.sendStatus(200);

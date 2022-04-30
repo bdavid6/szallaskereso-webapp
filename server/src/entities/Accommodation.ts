@@ -16,20 +16,22 @@ export class Accommodation {
     place!: string;
 
     @Property()
-    type!: string;
+    description!: string;
 
-    @Enum()
-    //reserved!: Reserved;
-    reserved: Reserved = Reserved.FALSE;
+    @Property()
+    technical_description!: string;
+
+    @Property()
+    adult_price!: number;
+
+    @Property()
+    child_price!: number;
+
+    @Property()
+    reserved: boolean = false;
 
     @Property()
     confirmed: boolean = false;
-
-    @Property()
-    createdAt = new Date();
-
-    @Property({ onUpdate: () => new Date() })
-    updatedAt = new Date();
 
     @ManyToMany(() => Tag, 'accommodations', { owner: true})
     tags = new Collection<Tag>(this);
@@ -39,9 +41,4 @@ export class Accommodation {
 
     @OneToMany(() => Reservation, reservation => reservation.accommodation)
     reservations = new Collection<Reservation>(this);
-}
-
-export enum Reserved {
-    TRUE = 'TRUE',
-    FALSE = 'FALSE',
 }

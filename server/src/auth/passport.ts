@@ -28,7 +28,7 @@ passport.use(
     done(null, {
       id: jwt_payload.sub,
       role: jwt_payload.role,
-      //username: jwt_payload.username,
+      username: jwt_payload.username,
       //name: jwt_payload.name,
       //e_mail: jwt_payload.e_mail,
     });

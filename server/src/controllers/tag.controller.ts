@@ -23,8 +23,3 @@ tagRouter
         await req.tagRepository!.persistAndFlush(tag);
         res.send(tag);
     })
-
-    .get('/filtertest', async (req, res) => {
-        const tags = await req.tagRepository!.find({text: "randomText"});
-        res.send(tags);
-    })

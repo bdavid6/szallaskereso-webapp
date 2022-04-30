@@ -8,17 +8,11 @@ export class Reservation {
     @PrimaryKey()
     id!: number;
 
-    /*@Property()
-    startDate!: Date;
+    @Property()
+    start_date!: string;
 
     @Property()
-    endDate!: Date;*/
-
-    @Property()
-    startDate!: number;
-
-    @Property()
-    endDate!: number;
+    end_date!: string;
 
     @ManyToOne(() => User)
     user!: User;
