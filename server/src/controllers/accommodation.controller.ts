@@ -13,10 +13,15 @@ accommodationRouter
         next();
     })
 
+    .get('', async (req, res) => {
+        const accommodations = await req.accommodationRepository!.findAll();
+        res.send(accommodations);
+    })
+
     .get('/:id', async (req, res) => {
         const id = parseInt(req.params.id);
         const accommodation = await req.accommodationRepository!.findOne({ id, confirmed: true });
-        if(accommodation) {
+        if (accommodation) {
             res.send(accommodation);
         } else {
             res.sendStatus(404);
