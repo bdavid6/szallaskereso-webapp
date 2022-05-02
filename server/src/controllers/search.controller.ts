@@ -9,31 +9,34 @@ searchRouter
         next();
     })
 
-    .get('/all', async (req, res) => {
-        const accommodations = await req.accommodationRepository!.find({ confirmed: true, reserved: false });
-        res.send(accommodations);
-    })
+    .get('', async (req, res) => {
+        let accommodations;
 
-    .get('/:page', async (req, res) => {
-        const page = parseInt(req.params.page);
-        const accommodations = await req.accommodationRepository!.find({ confirmed: true, reserved: false },
-            { limit: 3, offset: 3 * (page - 1) });
-        res.send(accommodations);
-    })
+        if (req.query.page) {
+            const page = (+req.query.page);
 
-    .get('/filter/:search/all', async (req, res) => {
-        const search = req.params.search;
-        const modifiedSearch = search.charAt(0).toUpperCase() + search.slice(1).toLowerCase();
-        const accommodations = await req.accommodationRepository!.find({ place: modifiedSearch, confirmed: true, reserved: false });
-        res.send(accommodations);
-    })
+            if (req.query.filter) {
+                const filter = String(req.query.filter);
+                const modifiedFilter = filter.charAt(0).toUpperCase() + filter.slice(1).toLowerCase();
 
-    .get('/filter/:search/:page', async (req, res) => {
-        const page = parseInt(req.params.page);
-        const search = req.params.search;
-        const modifiedSearch = search.charAt(0).toUpperCase() + search.slice(1).toLowerCase();
-        const accommodations = await req.accommodationRepository!.find({ place: modifiedSearch, confirmed: true, reserved: false },
-            { limit: 3, offset: 3 * (page - 1) });
-        res.send(accommodations);
+                accommodations = await req.accommodationRepository!.find({ place: modifiedFilter, confirmed: true, reserved: false },
+                    { limit: 3, offset: 3 * (page - 1) });
 
+            } else {
+                accommodations = await req.accommodationRepository!.find({ confirmed: true, reserved: false, },
+                    { limit: 3, offset: 3 * (page - 1) });
+            }
+
+        } else {
+
+            if (req.query.filter) {
+                const filter = String(req.query.filter);
+                const modifiedFilter = filter.charAt(0).toUpperCase() + filter.slice(1).toLowerCase();
+                accommodations = await req.accommodationRepository!.find({ place: modifiedFilter, confirmed: true, reserved: false });
+
+            } else {
+                accommodations = await req.accommodationRepository!.find({ confirmed: true, reserved: false });
+            }
+        }
+        res.send(accommodations);
     })
