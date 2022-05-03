@@ -28,7 +28,7 @@ export class Accommodation {
     child_price!: number;
 
     @Property()
-    reserved: boolean = false;
+    active: boolean = true;
 
     @Property()
     confirmed: boolean = false;

@@ -2,7 +2,7 @@ import { wrap } from "@mikro-orm/core";
 import { Router } from "express";
 import { generateJwt } from "../auth/jwt-generator";
 import { hashPassword } from "../auth/password-security";
-import { User } from "../entities/User";
+import { Role, User } from "../entities/User";
 
 export const authRouter = Router();
 
@@ -47,6 +47,7 @@ authRouter
         return res.send({
             //...user,
             token: generateJwt(user),
+            role: user.role
         });
     });
 

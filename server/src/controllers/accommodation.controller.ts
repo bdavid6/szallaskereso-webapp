@@ -29,9 +29,9 @@ accommodationRouter
         }
     })
 
-    //lefoglalt szállások lekérdezése
+    //user által kiadott szállások lekérdezése
     .get('', async (req, res) => {
-        const accommodations = await req.accommodationRepository!.find( { reservations: { user: { id: req.user!.id } } , confirmed: true })
+        const accommodations = await req.accommodationRepository!.find({ user: req.user!.id, confirmed: true })
         res.send(accommodations);
     })
 
@@ -60,10 +60,10 @@ accommodationRouter
     .post('/:id', async (req, res) => {
         const id = parseInt(req.params.id);
         const reservation = new Reservation();
-        const accommodation = await req.accommodationRepository!.findOne( { id: id } )
+        const accommodation = await req.accommodationRepository!.findOne({ id: id })
 
-        if(accommodation!.user.id == req.user!.id) {
-            
+        if (accommodation!.user.id == req.user!.id) {
+
             res.sendStatus(405);
         } else {
 
@@ -75,14 +75,14 @@ accommodationRouter
                 wrap(reservation).assign(req.body, { em: req.orm.em });
                 reservation!.user = req.orm.em.getReference(User, req.user!.id);
                 reservation!.accommodation = req.orm.em.getReference(Accommodation, id);
-    
-                await req.reservationRepository!.persistAndFlush(reservation);  
+
+                await req.reservationRepository!.persistAndFlush(reservation);
                 res.sendStatus(200);
             }
         }
     })
 
-    //foglalás visszamondás
+    //foglalás visszamondás, accommodation id alapján
     .delete('/:id', async (req, res) => {
         const id = parseInt(req.params.id);
         const reservation = await req.reservationRepository!.nativeDelete({ user: req.user!.id, accommodation: id });
@@ -99,13 +99,31 @@ accommodationRouter
 
         wrap(accommodation).assign(req.body, { em: req.orm.em });
         accommodation!.user = req.orm.em.getReference(User, req.user!.id);
-        
+
         const place = req.body.place;
         const modifiedPlace = place.charAt(0).toUpperCase() + place.slice(1).toLowerCase();
         accommodation.place = modifiedPlace;
 
         await req.accommodationRepository!.persistAndFlush(accommodation);
         res.send(accommodation);
+    })
+
+    .put('/:id', async (req, res) => {
+        const id = parseInt(req.params.id);
+        const accommodation = await req.accommodationRepository!.findOne({ id: id });
+        if (!accommodation) {
+            res.sendStatus(409);
+
+        } else {
+            if (accommodation.active) {
+                accommodation.active = false;
+                
+            } else {
+                accommodation.active = true;
+            }
+            await req.accommodationRepository!.persistAndFlush(accommodation!);
+            res.sendStatus(200);
+        }
     })
 
 /*.post('/', async (req, res) => {

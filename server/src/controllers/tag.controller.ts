@@ -1,6 +1,5 @@
 import { wrap } from "@mikro-orm/core";
 import { Router } from "express";
-import { authorize } from "../auth/authorize";
 import { Tag } from "../entities/Tag";
 import { Role } from "../entities/User";
 
