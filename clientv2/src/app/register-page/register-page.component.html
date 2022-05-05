@@ -1,0 +1,46 @@
+<div class="body" fxLayout="column" fxLayoutAlign="center center">
+    <h1><b>Regisztráció</b></h1>
+    <form #formDirective="ngForm" [formGroup]="registerForm" (submit)="registerButton(formDirective)">
+        <div>
+            <mat-form-field appearance="outline" fxFlex="fill">
+                <mat-label>Felhasználó név</mat-label>
+                <input matInput type="text" name="username" formControlName="username"/>
+                <mat-error *ngIf="username.invalid">
+                    {{ username.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline" fxFlex="fill">
+                <mat-label>Jelszó</mat-label>
+                <input matInput type="password" name="password" formControlName="password"/>
+                <mat-error *ngIf="password.invalid">
+                    {{ password.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline" fxFlex="fill">
+                <mat-label>Név</mat-label>
+                <input matInput type="name" name="name" formControlName="name"/>
+                <mat-error *ngIf="name.invalid">
+                    {{ name.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline" fxFlex="fill">
+                <mat-label>E-mail cím</mat-label>
+                <input email="true" matInput type="e_mail" name="e_mail" formControlName="e_mail"/>
+                <mat-error *ngIf="e_mail.invalid">
+                    {{ e_mail.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+            <button mat-raised-button>Regisztrálás</button>
+    </form>
+    <div fxLayout="row" fxLayoutGap="5">
+        <h5>Már regisztrált?</h5>
+        <h5 class="loginLink" routerLink="/auth/login">Jelentkezzen be</h5>
+    </div>
+</div>

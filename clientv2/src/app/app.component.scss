@@ -1,0 +1,50 @@
+.header {
+    height: 80px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.250);
+}
+
+.title {
+    margin-left: 20%;
+    font-size: x-large;
+    cursor: pointer;
+    color: rgba(20, 104, 58, 0.877);
+}
+
+.mat-icon {
+    margin-left: 3px;
+    transform: scale(1.4);
+    cursor: pointer;
+}
+
+.menu {
+    margin-right: 20%;
+    margin-left: auto;
+}
+
+.mat-button {
+    color: gray;
+    font-size: large;
+    font-weight: lighter;
+}
+
+.partner-menu-button {
+    color: rgba(20, 104, 58, 0.877);
+    font-weight: 400;
+}
+
+.admin-menu-button {
+    color: red;
+}
+
+.mat-menu-item {
+    color: gray;
+    font-size: large;
+    font-weight: lighter;
+}
+
+.body {
+    max-width: 60%;
+    margin-top: 6%;
+    margin-left: 20%;
+    margin-right: 20%;
+}

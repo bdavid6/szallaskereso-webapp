@@ -56,43 +56,6 @@ accommodationRouter
         res.send(accommodation);
     })*/
 
-    //egy szállás lefoglalása
-    .post('/:id', async (req, res) => {
-        const id = parseInt(req.params.id);
-        const reservation = new Reservation();
-        const accommodation = await req.accommodationRepository!.findOne({ id: id })
-
-        if (accommodation!.user.id == req.user!.id) {
-
-            res.sendStatus(405);
-        } else {
-
-            if (await req.reservationRepository!.findOne(
-                { $and: [{ user: req.user!.id }, { accommodation: id }] }
-            )) {
-                res.sendStatus(409);
-            } else {
-                wrap(reservation).assign(req.body, { em: req.orm.em });
-                reservation!.user = req.orm.em.getReference(User, req.user!.id);
-                reservation!.accommodation = req.orm.em.getReference(Accommodation, id);
-
-                await req.reservationRepository!.persistAndFlush(reservation);
-                res.sendStatus(200);
-            }
-        }
-    })
-
-    //foglalás visszamondás, accommodation id alapján
-    .delete('/:id', async (req, res) => {
-        const id = parseInt(req.params.id);
-        const reservation = await req.reservationRepository!.nativeDelete({ user: req.user!.id, accommodation: id });
-        if (reservation) {
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(409);
-        }
-    })
-
     //szállás bejelentése
     .post('/', async (req, res) => {
         const accommodation = new Accommodation();
@@ -106,8 +69,10 @@ accommodationRouter
 
         await req.accommodationRepository!.persistAndFlush(accommodation);
         res.send(accommodation);
+        //STATUSZT KÜLDENI A v2 kliensre !!!!!!!!!!!!!!!!!!!!!!!
     })
 
+    //szállás aktiválása, inaktiválása
     .put('/:id', async (req, res) => {
         const id = parseInt(req.params.id);
         const accommodation = await req.accommodationRepository!.findOne({ id: id });

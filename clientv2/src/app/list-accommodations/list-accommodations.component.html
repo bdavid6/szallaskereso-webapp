@@ -1,0 +1,26 @@
+<mat-card class="accommodation-card" *ngFor="
+let acco of accommodations | paginate: {
+    itemsPerPage: pageSize,
+    currentPage: page,
+    totalItems: itemCount
+};">
+    <img class="main-image" src="./assets/img/noimage.png">
+    <mat-card-header>
+        <mat-card-title>{{ acco.name }}</mat-card-title>
+        <mat-card-subtitle>{{ acco.place }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{ acco.description }}
+        </p>
+    </mat-card-content>
+    <p class="actions">
+        <button *ngIf="isLoggedIn" mat-button [routerLink]="['../accommodations/' + acco.id]">MEGTEKINTÉS</button>
+        <button *ngIf="!isLoggedIn" mat-button matTooltip="Bejelentkezés szükséges" matTooltipPosition="right"
+            class="disabled">MEGTEKINTÉS</button>
+    </p>
+</mat-card>
+<div>
+    <pagination-controls previousLabel="Előző" nextLabel="Következő" (pageChange)="onDataChange($event)">
+    </pagination-controls>
+</div>

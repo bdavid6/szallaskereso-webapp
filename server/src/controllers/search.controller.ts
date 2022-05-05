@@ -40,3 +40,18 @@ searchRouter
         }
         res.send(accommodations);
     })
+
+    //ez csak tesztelnu valamit, kitörölni majd
+    .get('/:id', async (req, res) => {
+        let accommodations;
+
+        if (req.query.filter) {
+            const filter = String(req.query.filter);
+            const modifiedFilter = filter.charAt(0).toUpperCase() + filter.slice(1).toLowerCase();
+            accommodations = await req.accommodationRepository!.find({ place: modifiedFilter, confirmed: true, active: true });
+
+        } else {
+            accommodations = await req.accommodationRepository!.find({ confirmed: true, active: true });
+        }
+        res.send(accommodations);
+    })

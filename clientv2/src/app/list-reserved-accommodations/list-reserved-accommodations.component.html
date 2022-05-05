@@ -1,0 +1,15 @@
+<mat-card class="accommodation-card" *ngFor="let acco of accommodations">
+    <img class="main-image" src="./assets/img/noimage.png">
+    <mat-card-header>
+        <mat-card-title>{{ acco.name }} id: {{ acco.id}}</mat-card-title>
+        <mat-card-subtitle>{{ acco.place }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{ acco.description }}
+        </p>
+    </mat-card-content>
+    <p class="actions">
+        <button (click)="resignButton(acco.id)" mat-button>VISSZAMONDÁS</button>
+    </p>
+</mat-card>

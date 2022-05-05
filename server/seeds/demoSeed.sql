@@ -36,9 +36,9 @@ insert into accommodation (name, place, phone_number, description, information, 
 insert into accommodation (name, place, phone_number, description, information, services, res_start_date, res_end_date, adult_price, child_price, active, confirmed, user_id) values ('Valami Hotel', '222222222222222222222', 123456789, 'Hosszabb leirás a szállodáról és környezetéről', 'Informaciok', "wifi,medence", 'startdate', 'enddate', 2000, 1000, true, true, 1);
 
 insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 1);
-insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 1);
-insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 1);
-insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 1);
-insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 1);
-insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 1);
-insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 1);
+insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 2);
+insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 3);
+insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 4);
+insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 5);
+insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 6);
+insert into reservation (start_date, end_date, nights, rooms, adults, children, user_id, accommodation_id) values ('2022-05-08', '2022-05-15', 3, 3, 5, 2, 2, 7);

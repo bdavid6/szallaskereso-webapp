@@ -1,0 +1,28 @@
+<div class="body" fxLayout="column" fxLayoutAlign="center center">
+    <h1><b>Bejelentkezés</b></h1>
+    <form [formGroup]="loginForm" (submit)="loginButton()">
+        <div>
+            <mat-form-field appearance="outline" fxFlex="fill">
+                <mat-label>Felhasználó név</mat-label>
+                <input matInput type="text" name="username" formControlName="username" />
+                <mat-error *ngIf="username.invalid">
+                    {{ username.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline" fxFlex="fill">
+                <mat-label>Jelszó</mat-label>
+                <input matInput type="password" name="password" formControlName="password" />
+                <mat-error *ngIf="password.invalid">
+                    {{ password.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <button mat-raised-button>Belépés</button>
+    </form>
+    <div fxLayout="row" fxLayoutGap="5">
+        <h5>Nincs még felhasználója?</h5>
+        <h5 class="registerLink" routerLink="/auth/register">Regisztráljon itt</h5>
+    </div>
+</div>

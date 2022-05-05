@@ -1,0 +1,29 @@
+<mat-toolbar class="header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="title" routerLink="/">
+    Szálláskereső
+    <mat-icon routerLink="/" aria-hidden="true" aria-label="Home icon">home</mat-icon>
+  </div>
+  <div class="menu" fxLayout="row">
+    <button *ngIf="isLoggedIn && isAdmin" mat-button [matMenuTriggerFor]="adminmenu"
+      class="admin-menu-button">Admin</button>
+    <mat-menu #adminmenu="matMenu">
+      <button mat-menu-item>Új szállások ellenőrzése</button>
+      <button mat-menu-item>Népszerű úticélok beállítása</button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="partnermenu" class="partner-menu-button">Partnereknek</button>
+    <mat-menu #partnermenu="matMenu">
+      <button mat-menu-item routerLink="/new-accommodation">Új szállás felvétele </button>
+      <button mat-menu-item routerLink="/manage-accommodations">Szállások kezelése</button>
+      <button mat-menu-item routerLink="/information">Információk</button>
+    </mat-menu>
+    <button mat-button routerLink="/reserved-accommodations">Lefoglalt szállások</button>
+    <button *ngIf="!isLoggedIn" mat-button routerLink="/auth/login">Bejelentkezés</button>
+    <button *ngIf="isLoggedIn" mat-button (click)="logout()">Kijelentkezés</button>
+  </div>
+</mat-toolbar>
+
+<app-searchbar></app-searchbar>
+
+<div class="body">
+  <router-outlet></router-outlet>
+</div>
