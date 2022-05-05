@@ -1,6 +1,5 @@
 import { Collection, Entity, Enum, ManyToMany, ManyToOne, OneToMany, PrimaryKey, Property } from "@mikro-orm/core";
 import { Reservation } from "./Reservation";
-import { Tag } from "./Tag";
 import { User } from "./User";
 
 @Entity()
@@ -16,10 +15,22 @@ export class Accommodation {
     place!: string;
 
     @Property()
+    phone_number!: number;
+
+    @Property()
     description!: string;
 
     @Property()
-    technical_description!: string;
+    information!: string;
+
+    @Property()
+    services!: string[];
+
+    @Property()
+    res_start_date!: string;
+
+    @Property()
+    res_end_date!: string;
 
     @Property()
     adult_price!: number;
@@ -32,9 +43,6 @@ export class Accommodation {
 
     @Property()
     confirmed: boolean = false;
-
-    @ManyToMany(() => Tag, 'accommodations', { owner: true})
-    tags = new Collection<Tag>(this);
 
     @ManyToOne(() => User)
     user!: User;
