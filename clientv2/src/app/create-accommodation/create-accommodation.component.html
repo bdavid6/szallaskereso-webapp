@@ -1,1 +1,109 @@
-<p>create-accommodation works!</p>
+<!--<div style="margin-top: 30px">
+    <form [formGroup]="accommodationForm" (ngSubmit)="submit()">
+        <div *ngFor="let service of servicesData">
+            <input type="checkbox" (change)="onChange(service.type, $any($event.target).checked)" />
+            {{ service.type }}
+        </div>
+        <button>submit</button>
+    </form>
+</div>-->
+
+<div class="body" fxLayout="column" fxLayoutAlign="center center">
+    <h1><b>Szállás bejelentése</b></h1>
+    <!--<form #formDirective="ngForm" [formGroup]="accommodationForm" (submit)="createButton(formDirective)">-->
+    <h2 fxLayoutAlign="center center">
+        <mat-icon aria-hidden="true">keyboard_double_arrow_right</mat-icon>Alap adatok
+    </h2>
+
+    <form #formDirective="ngForm" [formGroup]="accommodationForm" (ngSubmit)="createButton(formDirective)">
+        <div class="basic" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+            <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Szállás név</mat-label>
+                <input matInput type="text" name="name" formControlName="name" />
+                <mat-error *ngIf="name.invalid">
+                    {{ name.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex="fill">
+                <mat-label>Hely</mat-label>
+                <input matInput type="text" name="place" formControlName="place" />
+                <mat-error *ngIf="place.invalid">
+                    {{ place.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex="20">
+                <mat-label>Telefonszám</mat-label>
+                <input matInput type="number" name="phone_number" formControlName="phone_number" />
+                <mat-error *ngIf="phone_number.invalid">
+                    {{ phone_number.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="area" fxLayout="column" fxLayoutAlign="center stretch">
+            <mat-form-field appearance="outline">
+                <mat-label>Rövid leírás a szállásról</mat-label>
+                <textarea matInput name="description" formControlName="description"></textarea>
+                <mat-error *ngIf="description.invalid">
+                    {{ description.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>További információk</mat-label>
+                <textarea matInput name="information" formControlName="information"
+                    placeholder="Pl. Közelben lévő kikapcsolódási, szórakozási, sportolási lehetőségek, látnivalók"></textarea>
+            </mat-form-field>
+        </div>
+
+        <h2 fxLayoutAlign="start center">
+            <mat-icon aria-hidden="true">keyboard_double_arrow_right</mat-icon>Válassza ki a meglévő szolgáltatásokat
+        </h2>
+        <div class="services" fxLayout="row" fxLayoutAlign="start center">
+            <div class="service" *ngFor="let service of servicesData">
+                <input type="checkbox" (change)="onChange(service.type, $any($event.target).checked)" />
+                {{ service.type }}
+            </div>
+        </div>
+
+        <h2 fxLayoutAlign="start center">
+            <mat-icon aria-hidden="true">keyboard_double_arrow_right</mat-icon>Foglalással kapcsolatos adatok
+        </h2>
+
+        <div class="res_info" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="150px">
+            <div fxLayout="column">
+                <h3 fxLayoutAlign="start center">
+                    <mat-icon aria-hidden="true">keyboard_arrow_right</mat-icon>Árak
+                </h3>
+                <div fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Felnőtt</mat-label>
+                        <input matInput type="number" name="adult_price" formControlName="adult_price" />
+                        <mat-error *ngIf="adult_price.invalid">
+                            {{ adult_price.errors! | appErrors }}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Gyermek</mat-label>
+                        <input matInput type="number" name="child_price" formControlName="child_price" />
+                        <mat-error *ngIf="child_price.invalid">
+                            {{ child_price.errors! | appErrors }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="column">
+                <h3 fxLayoutAlign="start center">
+                    <mat-icon aria-hidden="true">keyboard_arrow_right</mat-icon>Kiadás vége <sup>&nbsp; /nem
+                        kötelező/</sup>
+                </h3>
+                <mat-form-field appearance="outline">
+                    <input matInput [min]="myDate" [matDatepicker]="picker" type="string" name="res_end_date"
+                        formControlName="res_end_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker color="primary"></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        <button mat-raised-button>Beküldés</button>
+    </form>
+</div>

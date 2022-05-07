@@ -26,8 +26,8 @@ export class Accommodation {
     @Property()
     services!: string[];
 
-    @Property()
-    res_start_date!: string;
+    /*@Property()
+    res_start_date!: string;*/
 
     @Property()
     res_end_date!: string;

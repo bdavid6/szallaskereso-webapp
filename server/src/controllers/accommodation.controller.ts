@@ -68,8 +68,8 @@ accommodationRouter
         accommodation.place = modifiedPlace;
 
         await req.accommodationRepository!.persistAndFlush(accommodation);
-        res.send(accommodation);
-        //STATUSZT KÜLDENI A v2 kliensre !!!!!!!!!!!!!!!!!!!!!!!
+        console.log(accommodation)
+        res.sendStatus(200);
     })
 
     //szállás aktiválása, inaktiválása

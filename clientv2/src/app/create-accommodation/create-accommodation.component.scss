@@ -1,0 +1,49 @@
+form {
+    width: 100%;
+    min-width: 600px;
+}
+
+h1 {
+    margin-bottom: 80px;
+    border-bottom: 3px solid rgba(20, 104, 58, 0.877);
+}
+
+h2 {
+    margin-top: 30px;
+    align-self: flex-start;
+}
+
+mat-icon {
+    color: rgba(20, 104, 58, 0.877);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.services {
+    background-color: #F5F5F5;
+    flex-wrap: wrap;
+}
+
+.service {
+    flex: 1 0 21%;
+    margin: 5px;
+    height: 30px;
+}
+
+mat-card {
+    min-height: 230px;
+    max-height: 230px;
+}
+
+button {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    width: inherit;
+    background-color: rgba(20, 104, 58, 0.877);
+    color: white;
+}

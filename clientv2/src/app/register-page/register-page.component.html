@@ -31,7 +31,7 @@
         <div>
             <mat-form-field appearance="outline" fxFlex="fill">
                 <mat-label>E-mail cím</mat-label>
-                <input email="true" matInput type="e_mail" name="e_mail" formControlName="e_mail"/>
+                <input email="true" matInput type="e_mail" name="e_mail" formControlName="e_mail" placeholder="Pl. pelda@pelda.hu"/>
                 <mat-error *ngIf="e_mail.invalid">
                     {{ e_mail.errors! | appErrors }}
                 </mat-error>

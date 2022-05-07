@@ -13,6 +13,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,7 +65,10 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     MatFormFieldModule,
     MatCardModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {
@@ -69,6 +76,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
       useClass: AuthInterceptor,
       multi: true,
     },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
