@@ -1,6 +1,12 @@
-<mat-toolbar class="searchbar-container">
+<mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async | slice : 0 : 3" [value]="option">
+        {{option}}
+    </mat-option>
+</mat-autocomplete>
+
+<mat-toolbar class="searchbar-container" fxLayout="column" fxLayoutAlign="center center">
     <mat-toolbar class="searchbar">
-        <input matInput type="text" name="search" onfocus="this.select()" placeholder="Írja be az úticélt"
+        <input matInput type="text" name="search" [formControl]="myControl" [matAutocomplete]="auto" onfocus="this.select()" placeholder="Írja be az úticélt"
             [(ngModel)]="searchText" />
         <button *ngIf="!searchText" mat-button class="search-button" [routerLink]="['search']"
             (click)="clearSearch()">Keresés</button>

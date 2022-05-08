@@ -9,6 +9,8 @@ import { Accommodation } from '../interfaces/accommodation';
 export class SearchService {
 
   clicked: boolean = false;
+
+  options: string[] = [];
   
   constructor(
     private http: HttpClient
@@ -24,14 +26,14 @@ export class SearchService {
     let accommodations;
     if (filterText) {
       const modifiedFilterText = filterText.charAt(0).toUpperCase() + filterText.slice(1).toLowerCase();
-      accommodations = this.http.get<Accommodation[]>('/api/search/'+3,
+      accommodations = this.http.get<Accommodation[]>('/api/search/',
         {
           params: {
             filter: modifiedFilterText
           },
         });
     } else {
-      accommodations = this.http.get<Accommodation[]>('/api/search/'+3);
+      accommodations = this.http.get<Accommodation[]>('/api/search/');
     }
     return accommodations;
   }

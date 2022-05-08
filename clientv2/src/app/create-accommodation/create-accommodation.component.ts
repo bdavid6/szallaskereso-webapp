@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common'
 import { AccommodationService } from '../core/services/accommodation.service';
+import { SearchService } from '../core/services/search.service';
 
 @Component({
   selector: 'app-create-accommodation',
@@ -58,7 +59,8 @@ export class CreateAccommodationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private datepipe: DatePipe,
-    private as: AccommodationService
+    private as: AccommodationService,
+    private ss: SearchService
   ) {
 
   }
@@ -103,6 +105,8 @@ export class CreateAccommodationComponent implements OnInit {
           console.log(status.status);
         });
 
+      //beletenni a search-autocomplete listába
+      this.ss.options.push(this.accommodationForm.controls['place'].value)
       //clear
       formDirective.resetForm();
       this.accommodationForm.reset();

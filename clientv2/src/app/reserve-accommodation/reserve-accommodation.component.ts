@@ -53,7 +53,8 @@ export class ReserveAccommodationComponent implements OnInit {
     private fb: FormBuilder,
     private datepipe: DatePipe,
     private rs: ReservationService,
-    private ns: NotificationService
+    private ns: NotificationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -112,6 +113,7 @@ export class ReserveAccommodationComponent implements OnInit {
   }
 
   backButton() {
-
+    this.router.navigate(['search'], 
+    { queryParams: { filter: localStorage.getItem('filter'), page: localStorage.getItem('page')}})
   }
 }

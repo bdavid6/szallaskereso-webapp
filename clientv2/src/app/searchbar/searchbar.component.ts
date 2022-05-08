@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { map, Observable, startWith } from 'rxjs';
+import { SearchService } from '../core/services/search.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -7,20 +10,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
 
+  myControl = new FormControl();
   searchText = '';
+  filteredOptions?: Observable<string[]>
 
-  constructor() { }
+  constructor(
+    private ss: SearchService
+  ) { 
+    this.fetchData();
+  }
 
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
+  }
+
+  fetchData(): void {
+    this.ss.getAccommodationsBySearch('').subscribe(
+      (response) => {
+        for(let i=0; i < response.length; i++) {
+          this.ss.options.push(response[i].place)
+        }
+      },
+      (error) => {
+        console.log(error);
+      });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.ss.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   formatSearchText(): string {
     const text = this.searchText.replace(/\s/g, "");
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  }
-
-  selectedServices(): void {
-    
   }
 
   clearSearch() {

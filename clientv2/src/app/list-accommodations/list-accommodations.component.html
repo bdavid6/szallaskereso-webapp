@@ -31,8 +31,8 @@
                 </mat-chip-list>
             </div>
         </div>
-        <button *ngIf="isLoggedIn" mat-button [routerLink]="['../accommodations/' + acco.id]">MEGTEKINTÉS</button>
+        <button *ngIf="isLoggedIn" mat-button [routerLink]="['../accommodations/' + acco.id]" (click)="save()">MEGTEKINTÉS</button>
         <button *ngIf="!isLoggedIn" mat-button matTooltip="Bejelentkezés szükséges" matTooltipPosition="right"
-            class="disabled">MEGTEKINTÉS</button>
+            class="disabled" (click)="alert()">MEGTEKINTÉS</button>
     </div>
 </div>

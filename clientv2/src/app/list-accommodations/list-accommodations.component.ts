@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Accommodation } from '../core/interfaces/accommodation';
 import { AuthService } from '../core/services/auth.service';
+import { NotificationService } from '../core/services/notification.service';
 import { SearchService } from '../core/services/search.service';
 
 @Component({
@@ -28,13 +29,15 @@ export class ListAccommodationsComponent implements OnInit {
   constructor(
     private ahs: AuthService,
     private ss: SearchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ns: NotificationService
   ) { }
 
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
         this.filterText = params.filter;
+        this.page = params.page;
         this.fetchData();
       });
   }
@@ -42,7 +45,7 @@ export class ListAccommodationsComponent implements OnInit {
   fetchData(): void {
     this.ss.getAccommodationsBySearch(this.filterText).subscribe(
       (response) => {
-        this.accommodations = response;;
+        this.accommodations = response;
       },
       (error) => {
         console.log(error);
@@ -52,5 +55,23 @@ export class ListAccommodationsComponent implements OnInit {
   onDataChange(event: any) {
     this.page = event;
     this.fetchData();
+  }
+
+  alert(): void {
+    this.ns.showNotification("error", "Bejelentkezés szükséges", 1200);
+  }
+
+  save(): void {
+    //vissza gombhoz elmenteni
+    if(this.filterText == undefined) {
+      localStorage.setItem('filter', '');
+    } else {
+      localStorage.setItem('filter', this.filterText);
+    }
+    if(this.page == undefined) {
+      localStorage.setItem('page', '1');
+    } else {
+      localStorage.setItem('page', String(this.page));
+    }
   }
 }

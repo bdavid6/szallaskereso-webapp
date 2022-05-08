@@ -9,7 +9,7 @@ searchRouter
         next();
     })
 
-    .get('', async (req, res) => {
+    /*.get('', async (req, res) => {
         let accommodations;
 
         if (req.query.page) {
@@ -39,10 +39,9 @@ searchRouter
             }
         }
         res.send(accommodations);
-    })
+    })*/
 
-    //ez csak tesztelnu valamit, kitörölni majd
-    .get('/:id', async (req, res) => {
+    .get('', async (req, res) => {
         let accommodations;
 
         if (req.query.filter) {
