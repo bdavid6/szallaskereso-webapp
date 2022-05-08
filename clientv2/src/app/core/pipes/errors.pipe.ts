@@ -17,6 +17,12 @@ export class ErrorsPipe implements PipeTransform {
     if (value.email) {
       return 'Hiányzó karakter @...';
     }
+    if (value.min) {
+      return 'Rossz érték!';
+    }
+    if (value.max) {
+      return 'Rossz érték!';
+    }
     return JSON.stringify(value);
   }
 

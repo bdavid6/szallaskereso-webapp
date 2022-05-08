@@ -17,7 +17,7 @@ export class ListAccommodationsComponent implements OnInit {
 
   page: number = 1;
 
-  pageSize: number = 4;
+  pageSize: number = 3;
 
   itemCount: number = 0;
 

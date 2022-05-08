@@ -21,6 +21,7 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/multer": "^1.4.7",
     "@types/node": "^17.0.25",
     "@types/passport": "^1.0.7",
     "@types/passport-jwt": "^3.0.6",
@@ -38,6 +39,7 @@
     "body-parser": "^1.20.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.4",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0"
   },

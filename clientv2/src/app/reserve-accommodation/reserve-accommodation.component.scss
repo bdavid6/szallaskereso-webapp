@@ -1,0 +1,166 @@
+.services {
+    flex-wrap: wrap;
+}
+
+mat-chip {
+    flex: 1 0 21%;
+    margin: 5px;
+    height: 30px;
+}
+
+.pagination {
+    max-height: 55px;
+}
+
+img {
+    min-height: 260px;
+    max-height: 260px;
+    min-width: 348px;
+    max-width: 348px;
+    border-bottom: 1px solid black;
+}
+
+.cards {
+    max-width: 350px;
+}
+
+.card {
+    min-height: 780px;
+    max-height: 780px;
+    min-width: 350px;
+    max-width: 350px;
+    border: 1px solid black;
+    margin-bottom: 30px;
+}
+
+.card2 {
+    min-height: 780px;
+    max-height: 780px;
+    min-width: 350px;
+    max-width: 350px;
+    border: 1px solid black;
+    margin-bottom: 30px;
+    background-color: #F5F5F5;
+}
+
+p {
+    font-size: large;
+    font-weight: lighter;
+}
+
+.name {
+    margin-left: 5px;
+    font-size: x-large;
+    font-weight: 500;
+    color: rgba(20, 104, 58, 0.877);
+}
+
+.place {
+    margin-left: 10px;
+    margin-top: -10px;
+    font-size: medium;
+    font-style: italic;
+}
+
+.cim {
+    font-weight: 500;
+}
+
+.sor {
+    max-width: 348px;
+    min-height: 120px;
+    min-height: 120px;
+    margin-left: 5px;
+}
+
+button {
+    margin-left: 135px;
+    background-color: gray;
+    color: black;
+}
+
+.header {
+    min-height: 130px;
+    max-height: 130px;
+    min-width: 348px;
+    max-width: 348px;
+    border-bottom: 1px solid black;
+    background-color: rgba(20, 104, 58, 0.877);
+}
+
+.name2 {
+    margin-top: 10px;
+    font-size: x-large;
+    font-weight: 500;
+    color: rgba(20, 104, 58, 0.877);
+}
+
+.cim2 {
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.sor2 {
+    max-width: 348px;
+    min-height: 120px;
+    min-height: 120px;
+}
+
+.sor3 {
+    margin-left: 15px;
+}
+
+form {
+    width: 350px;
+}
+
+mat-form-field {
+    width: 150px;
+    height: 70px;
+}
+
+.picker {
+    width: 250px;
+    margin-left: 45px;
+}
+
+
+.ár {
+    margin-top: 15px;
+    margin-left: 10px;
+    font-weight: 500;
+    color: black;
+    border-bottom: 2px solid black;
+}
+
+.cardnum {
+    margin-top: 10px;
+    width: 310px;
+    height: 40px;
+    margin-left: 14px;
+}
+
+.slim {
+    margin-left: 12px;
+    margin-top: 20px;
+    height: 40px;
+}
+
+.name3 {
+    margin-top: 12px;
+    font-size: x-large;
+    font-weight: 500;
+    color: rgba(20, 104, 58, 0.877);
+}
+
+.reserve {
+    background-color: rgba(20, 104, 58, 0.877);
+    color: white;
+    margin-top: 65px;
+}
+
+mat-icon {
+    margin-left: 50px;
+    transform: scale(1.2);
+    color: rgba(20, 104, 58, 0.877);
+}

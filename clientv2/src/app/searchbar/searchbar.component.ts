@@ -19,6 +19,10 @@ export class SearchbarComponent implements OnInit {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   }
 
+  selectedServices(): void {
+    
+  }
+
   clearSearch() {
     this.searchText = '';
   }

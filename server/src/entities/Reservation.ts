@@ -14,11 +14,11 @@ export class Reservation {
     @Property()
     end_date!: string;
 
-    @Property()
+    /*@Property()
     nights!: number;
 
     @Property()
-    rooms!: number;
+    rooms!: number;*/
 
     @Property()
     adults!: number;

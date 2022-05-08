@@ -67,8 +67,9 @@ accommodationRouter
         const modifiedPlace = place.charAt(0).toUpperCase() + place.slice(1).toLowerCase();
         accommodation.place = modifiedPlace;
 
+        accommodation.confirmed = true;
+
         await req.accommodationRepository!.persistAndFlush(accommodation);
-        console.log(accommodation)
         res.sendStatus(200);
     })
 

@@ -5,8 +5,8 @@ export interface Reservation {
     id: number;
     start_date: string;
     end_date: string;
-    nights: number;
-    rooms: number;
+    //nights: number;
+    //rooms: number;
     adults: number;
     children: number;
     user: User; //id

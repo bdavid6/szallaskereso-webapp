@@ -9,6 +9,7 @@ export interface Accommodation {
     description: string;
     information: string;
     services: string[];
+    //res_start_date: string;
     res_end_date: string;
     adult_price: number;
     child_price: number;
