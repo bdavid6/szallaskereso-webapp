@@ -1,1 +1,42 @@
-<p>manage-accommodations works!</p>
+<div class="body" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <h1><b>Kiadott szállásaim és foglalások</b></h1>
+    <div class="text">
+      ~ itt tudja megtekinteni az összes szállását, válasszon ki egyet <br> és
+        már meg is jelennek a hozzá tartozó foglalások ~
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let acco of accommodations">
+            <mat-expansion-panel-header>
+                <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon *ngIf="acco.active" class="active-on-icon" aria-hidden="false" aria-label="Active icon">
+                        done</mat-icon>
+                    <mat-icon *ngIf="!acco.active" class="active-off-icon" aria-hidden="false" aria-label="Active icon">
+                        close
+                    </mat-icon>
+                    <p>{{acco.name}}</p>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th class="delete"></th>
+                        <th class="date">Érkezés</th>
+                        <th class="date">Távozás</th>
+                        <th class="person">Vendégek</th>
+                    </tr>
+                    <tr *ngFor="let res of acco.reservations">
+                        <td class="delete">
+                            <mat-icon class="delete-icon" (click)="deleteButton(res.id)" aria-hidden="false"
+                                aria-label="Delete icon">delete</mat-icon>
+                        </td>
+                        <td class="date">{{res.start_date}}</td>
+                        <td class="date">{{res.end_date}}</td>
+                        <td class="person">{{res.adults}} felnőtt, {{res.children}} gyermek&nbsp;({{res.children
+                            +
+                            res.adults}})</td>
+                    </tr>
+                </table>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

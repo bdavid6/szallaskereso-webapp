@@ -16,7 +16,7 @@
       <button mat-menu-item routerLink="/manage-accommodations">Szállások kezelése</button>
       <button mat-menu-item routerLink="/information">Információk</button>
     </mat-menu>
-    <button mat-button routerLink="/reserved-accommodations">Lefoglalt szállások</button>
+    <button mat-button routerLink="/reserved-accommodations">Felhasználó menü</button>
     <button *ngIf="!isLoggedIn" mat-button routerLink="/auth/login">Bejelentkezés</button>
     <button *ngIf="isLoggedIn" mat-button (click)="logout()">Kijelentkezés</button>
   </div>

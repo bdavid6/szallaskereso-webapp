@@ -1,0 +1,30 @@
+.body {
+    min-height: 400px;
+}
+
+mat-icon {
+    margin-right:30px;
+}
+
+p {
+    margin-top: 10px;
+    font-size: x-large;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.text {
+    margin-top: 30px;
+    font-size: large;
+    text-align: center;
+}
+
+table {
+    min-width: 600px;
+    text-align: left;
+}
+
+.delete-icon {
+    cursor: pointer;
+    color: firebrick;
+}

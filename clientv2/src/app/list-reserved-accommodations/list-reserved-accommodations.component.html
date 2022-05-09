@@ -1,4 +1,4 @@
-<mat-card class="accommodation-card" *ngFor="let acco of accommodations">
+<!--<mat-card class="accommodation-card" *ngFor="let acco of accommodations">
     <img class="main-image" src="./assets/img/noimage.png">
     <mat-card-header>
         <mat-card-title>{{ acco.name }} id: {{ acco.id}}</mat-card-title>
@@ -12,4 +12,62 @@
     <p class="actions">
         <button (click)="resignButton(acco.id)" mat-button>VISSZAMONDÁS</button>
     </p>
-</mat-card>
+</mat-card>-->
+<div class="body">
+    <mat-tab-group mat-stretch-tabs mat-align-tabs="center" animationDuration="1500ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">home</mat-icon>
+                Foglalások
+            </ng-template>
+            <div class="content-box1">
+
+                <div class="table">
+                    <table>
+                        <tr>
+                            <th class="delete">Törlés</th>
+                            <th class="acconame">Szállás neve</th>
+                            <th class="accoplace">Hely</th>
+                            <th class="date">Érkezés</th>
+                            <th class="date">Távozás</th>
+                            <th class="person">Személyek</th>
+                        </tr>
+
+                        <tr *ngFor="let res of reservations">
+                            <td class="delete">
+                                <mat-icon class="delete-icon" (click)="resignButton(res.id)" aria-hidden="false"
+                                    aria-label="Delete icon">event busy</mat-icon>
+                            </td>
+                            <td class="acconame">{{(res.accommodation.name.length > 22) ? (res.accommodation.name |
+                                slice:0:22) + '...' : res.accommodation.name}}</td>
+                            <td class="accoplace">{{res.accommodation.place}}</td>
+                            <td class="date">{{res.start_date}}</td>
+                            <td class="date">{{res.end_date}}</td>
+                            <td class="person">{{res.adults}} felnőtt, {{res.children}} gyermek&nbsp;({{res.children +
+                                res.adults}})</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="tab-icon">mail</mat-icon>
+                Értesítéseim
+            </ng-template>
+            <div class="content-box2">
+                <div *ngFor="let mes of messages">
+                    <div class="message" fxLayout="column" fxLayoutAlign="start stretch">
+                        <p><b>Küldve:</b> {{mes.createdAt}}</p>
+                        <div fxLayout="row" fxLayoutAlign="space-between start">
+                            <p><b>Üzenet:</b> {{mes.text1}}</p>
+                            <mat-icon class="message-delete" (click)="deleteMessageButton(mes.id)">close</mat-icon>
+                        </div>
+                        <p class="last-line">> {{mes.text2}}</p>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

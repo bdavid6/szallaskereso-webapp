@@ -1,0 +1,97 @@
+.body {
+    min-height: 400px;
+}
+
+.content-box1 {
+    margin: auto;
+    margin-top: 45px;
+    min-height: 395px;
+    min-width: 720px;
+    max-width: 70%;
+    background-color: #F5F5F5;
+    border-right: 30px solid rgba(20, 104, 58, 0.877);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.content-box2 {
+    margin: auto;
+    margin-top: 45px;
+    min-height: 395px;
+    min-width: 720px;
+    max-width: 70%;
+    background-color: #F5F5F5;
+    border-left: 30px solid rgba(20, 104, 58, 0.877);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+table {
+    text-align: left;
+    font-size: larger;
+    font-weight: lighter;
+}
+
+th {
+    border-bottom: 1px solid green;
+}
+
+.delete {
+    text-align: center;
+    min-width: 70px;
+    max-width: 70px;
+}
+
+.acconame {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.accoplace {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.date {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.person {
+    min-width: 190px;
+    max-width: 190px;
+}
+
+.tab-icon {
+    margin-right: 5px;
+    transform: scale(1.2);
+}
+
+.delete-icon {
+    cursor: pointer;
+    color: firebrick;
+    margin-top: 6px;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 47px;
+}
+
+.message {
+    background-color: rgba(25, 150, 81, 0.185);
+    border-radius: 25px;
+    margin-bottom: 20px;
+    margin-left: -15px;
+    font-size: large;
+}
+
+.last-line {
+    margin-left: 110px;
+}
+
+.message-delete {
+    cursor: pointer;
+    color: firebrick;
+    margin-right: 10px;
+    transform: scale(1.2);
+}

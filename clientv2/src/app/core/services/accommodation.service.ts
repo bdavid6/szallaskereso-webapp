@@ -20,9 +20,9 @@ export class AccommodationService {
     return this.http.post<Accommodation>('/api/accommodations', accommodation);
   }
 
-  getReservedAccommodations(): Observable<Accommodation[]> {
+  /*getReservedAccommodations(): Observable<Accommodation[]> {
     return this.http.get<Accommodation[]>('/api/reservations');
-  }
+  }*/
 
   getCreatedAccommodations(): Observable<Accommodation[]> {
     return this.http.get<Accommodation[]>('/api/accommodations');

@@ -20,6 +20,9 @@ import { DatePipe } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -74,7 +77,10 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     MatNativeDateModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatDividerModule
   ],
   providers: [
     {

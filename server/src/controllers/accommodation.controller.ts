@@ -31,7 +31,7 @@ accommodationRouter
 
     //user által kiadott szállások lekérdezése
     .get('', async (req, res) => {
-        const accommodations = await req.accommodationRepository!.find({ user: req.user!.id, confirmed: true })
+        const accommodations = await req.accommodationRepository!.find({ user: req.user!.id, confirmed: true }, { populate: ['reservations'] })
         res.send(accommodations);
     })
 

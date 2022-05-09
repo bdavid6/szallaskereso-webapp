@@ -12,6 +12,10 @@ export class ReservationService {
     private http: HttpClient
   ) { }
 
+  getReservationsByUserId(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>('/api/reservations');
+  }
+
   getReservationsByAccommodationId(accommodationId: number): Observable<Reservation[]> {
     return this.http.get<Reservation[]>('/api/reservations/accommodation/' + accommodationId);
   }
@@ -20,9 +24,9 @@ export class ReservationService {
     return this.http.post<Reservation>('/api/reservations/accommodation/' + accommodationId, reservation);
   }
 
-  deleteReservationByAccommodationId(accommodationId: number): Observable<Reservation> {
+  /*deleteReservationByAccommodationId(accommodationId: number): Observable<Reservation> {
     return this.http.delete<Reservation>('/api/reservations/accommodation/' + accommodationId);
-  }
+  }*/
 
   deleteReservationById(reservationId: number): Observable<Reservation> {
     return this.http.delete<Reservation>('/api/reservations/' + reservationId);
