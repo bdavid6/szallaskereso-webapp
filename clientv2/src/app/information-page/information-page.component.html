@@ -1,1 +1,22 @@
-<p>information-page works!</p>
+<div>
+    <p class="first-line">Hogyan adhatok ki szállást ?</p>
+    <dl>
+        <dt><em>1.</em> regisztráljon majd jelentkezzen be</dt>
+        <dt><em>2.</em> töltse ki a szükséges kérdőívet</dt>
+        <dd><em>-</em> ezt
+            <mark *ngIf="isLoggedIn" routerLink="/new-accommodation">ide kattintva</mark>
+            <mark *ngIf="!isLoggedIn" routerLink="/auth/login">ide kattintva</mark>
+            vagy a <b class="thin-bold">Partnereknek</b> menüben tudja elérni
+        </dd>
+        <dt><em>3.</em> véglegesítse a meghirdetést az "Elküldés" gombra kattintva</dt>
+        <dd><em>-</em> a hirdetés ellenőrzése és elfogadása után Ön hivatalosan is <b>Partner</b> lesz</dd>
+    </dl>
+    <br>
+    <p class="first-line">Mi a teendőm partnerként ?</p>
+    <dl>
+        <dt>A kiadott szállásainak felügyelete, amit a kezelőfelületen tud megtenni</dt>
+        <dt><em>figyelem:</em> csak végszükség esetén töröljön foglalást,</dt>
+        <dt> &nbsp;&nbsp;&nbsp;ha mégis törölnie kell egy foglalást vegye fel velünk a kapcsolatot</dt>
+        <dd><em>-</em> ezt az alábbi telefonszámon teheti meg: <b>36 123123.</b></dd>
+    </dl>
+</div>

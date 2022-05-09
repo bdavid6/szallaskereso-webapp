@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { SearchService } from '../core/services/search.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-searchbar',
@@ -12,11 +13,14 @@ export class SearchbarComponent implements OnInit {
 
   myControl = new FormControl();
   searchText = '';
+  dateText = '';
+  dateText1 = '';
   filteredOptions?: Observable<string[]>
 
   constructor(
-    private ss: SearchService
-  ) { 
+    private ss: SearchService,
+    private datepipe: DatePipe
+  ) {
     this.fetchData();
   }
 
@@ -28,9 +32,9 @@ export class SearchbarComponent implements OnInit {
   }
 
   fetchData(): void {
-    this.ss.getAccommodationsBySearch('').subscribe(
+    this.ss.getAccommodationsBySearch('', '').subscribe(
       (response) => {
-        for(let i=0; i < response.length; i++) {
+        for (let i = 0; i < response.length; i++) {
           this.ss.options.push(response[i].place)
         }
       },
@@ -50,8 +54,23 @@ export class SearchbarComponent implements OnInit {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   }
 
+  formatDateText(): string {
+    const date = this.datepipe.transform(this.dateText, 'yyyy-MM-dd');
+    return String(date);
+  }
+
+  date1Changed(): void {
+    const date1 = this.datepipe.transform(this.dateText1, 'yyyy-MM-dd');
+    if(this.dateText1 == null) {
+      localStorage.setItem('date1', '');
+    } else {
+      localStorage.setItem('date1', String(date1));;
+    }
+  }
+
   clearSearch() {
-    this.searchText = '';
+    //this.searchText = '';
+    //this.dateText = '';
   }
 
   async randomIdButton(): Promise<void> {

@@ -42,7 +42,6 @@ p {
     margin-left: 5px;
     font-size: x-large;
     font-weight: 500;
-    color: rgba(20, 104, 58, 0.877);
 }
 
 .place {
@@ -67,4 +66,8 @@ button {
     margin-left: 112px;
     background-color: rgba(20, 104, 58, 0.877);
     color: white;
+}
+
+.disabled {
+    background-color: rgba(20, 104, 58, 0.596);
 }

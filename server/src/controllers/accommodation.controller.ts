@@ -68,6 +68,8 @@ accommodationRouter
         accommodation.place = modifiedPlace;
 
         accommodation.confirmed = true;
+        accommodation.res_end_date = new Date(req.body.res_end_date);
+        console.log(accommodation.res_end_date)
 
         await req.accommodationRepository!.persistAndFlush(accommodation);
         res.sendStatus(200);

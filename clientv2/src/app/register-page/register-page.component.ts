@@ -46,8 +46,8 @@ export class RegisterPageComponent implements OnInit {
       await this.ahs.register(this.registerForm.value);
       
       //clear
-      formDirective.resetForm();
-      this.registerForm.reset();
+      //formDirective.resetForm();
+      //this.registerForm.reset();
 
     } else {
       return;

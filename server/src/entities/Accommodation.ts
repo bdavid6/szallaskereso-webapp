@@ -30,7 +30,7 @@ export class Accommodation {
     res_start_date!: string;*/
 
     @Property()
-    res_end_date!: string;
+    res_end_date!: Date;
 
     @Property()
     adult_price!: number;

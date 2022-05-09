@@ -91,6 +91,10 @@ export class AuthService {
           console.log(error);
           this.ns.showNotification("error", "Foglalt felhasználónév", 1200);
           this.router.navigate(['auth/register']);
+        } else if(error.status == 408) {
+          console.log(error);
+          this.ns.showNotification("error", "Már használt email cím", 1200);
+          this.router.navigate(['auth/register']);
         } else {
           this.ns.showNotification("success", "Sikeres regisztráció", 1200);
           this.router.navigate(['auth/login']);

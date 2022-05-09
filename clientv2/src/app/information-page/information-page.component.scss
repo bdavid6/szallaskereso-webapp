@@ -1,0 +1,36 @@
+div {
+    max-width: 100%;
+    min-width: 800px;
+    margin-left: 10%;
+    text-align: left;
+
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    line-height: 1.05;
+
+    font-weight: lighter;
+    font-size: x-large;
+}
+
+.first-line {
+    font-weight: bold;
+}
+
+mark {
+    background-color: #eceaea;
+    font-style: italic;
+    cursor: pointer;
+}
+
+b {
+    color: rgba(20, 104, 58, 0.877);
+}
+
+em {
+    color: rgba(20, 104, 58, 0.877);
+    font-weight: 500;
+}
+
+dl {
+    margin-left: 10px;
+}

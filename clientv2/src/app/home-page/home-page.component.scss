@@ -1,0 +1,70 @@
+.textarea {
+    max-width: 100%;
+    min-width: 800px;
+    margin-left: 10%;
+    text-align: left;
+
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    line-height: 1.05;
+
+    font-weight: lighter;
+    font-size: xx-large;
+    font-style: italic;
+}
+
+.first-line {
+    margin-bottom: 15px;
+}
+
+.second-line {
+    text-indent: 20px;
+}
+
+.third-line {
+    text-indent: 35px;
+    margin-bottom: 50px;
+}
+
+mark {
+    background-color: #eceaea;
+    cursor: pointer;
+}
+
+b {
+    color: rgba(20, 104, 58, 0.877);
+}
+
+.thin-bold {
+    font-weight: 500;
+}
+
+.title {
+    margin-top: 80px;
+    font-weight: 500;
+    font-size: x-large;
+    margin-left: 50px;
+}
+
+.recommended {
+    margin-top: 30px;
+    max-width: 100%;
+    min-width: 880px;
+    min-height: 300px;
+}
+
+mat-grid-list {
+    max-width: 98%;
+    min-width: 880px;
+}
+
+mat-grid-tile {
+    max-width: 100%;
+    height: auto;
+    border: 15px solid white;
+    cursor: pointer;
+}
+
+mat-grid-tile-footer {
+    font-size: x-large;
+}

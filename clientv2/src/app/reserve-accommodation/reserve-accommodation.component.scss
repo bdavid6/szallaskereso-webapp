@@ -52,7 +52,6 @@ p {
     margin-left: 5px;
     font-size: x-large;
     font-weight: 500;
-    color: rgba(20, 104, 58, 0.877);
 }
 
 .place {
@@ -100,6 +99,14 @@ button {
     margin-left: 5px;
 }
 
+.sor1 {
+    border-top: 2px dotted rgba(20, 104, 58, 0.877);
+    max-width: 348px;
+    min-height: 120px;
+    min-height: 120px;
+}
+
+
 .sor2 {
     max-width: 348px;
     min-height: 120px;
@@ -117,6 +124,7 @@ form {
 mat-form-field {
     width: 150px;
     height: 70px;
+    font-weight: 500;
 }
 
 .picker {

@@ -16,6 +16,8 @@ export class ListAccommodationsComponent implements OnInit {
 
   filterText = '';
 
+  dateText = '';
+
   page: number = 1;
 
   pageSize: number = 3;
@@ -37,13 +39,14 @@ export class ListAccommodationsComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.filterText = params.filter;
+        this.dateText = params.date;
         this.page = params.page;
         this.fetchData();
       });
   }
 
   fetchData(): void {
-    this.ss.getAccommodationsBySearch(this.filterText).subscribe(
+    this.ss.getAccommodationsBySearch(this.filterText, this.dateText).subscribe(
       (response) => {
         this.accommodations = response;
       },
@@ -67,6 +70,11 @@ export class ListAccommodationsComponent implements OnInit {
       localStorage.setItem('filter', '');
     } else {
       localStorage.setItem('filter', this.filterText);
+    }
+    if(this.dateText == undefined) {
+      localStorage.setItem('date', '');
+    } else {
+      localStorage.setItem('date', this.dateText);
     }
     if(this.page == undefined) {
       localStorage.setItem('page', '1');

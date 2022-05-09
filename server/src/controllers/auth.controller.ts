@@ -20,6 +20,10 @@ authRouter
         if (user) {
             return res.sendStatus(409);
         }
+        user = await req.userRepository!.findOne({ e_mail });
+        if (user) {
+            return res.sendStatus(408);
+        }
         
         const hashedPassword = await hashPassword(password);
 

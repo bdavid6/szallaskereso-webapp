@@ -25,8 +25,8 @@ export class ReserveAccommodationComponent implements OnInit {
   cardcvc?: string = '';
 
   reserveForm: FormGroup = this.fb.group({
-    start_date: [null, Validators.required],
-    end_date: [null, Validators.required],
+    start_date: [localStorage.getItem('date1'), Validators.required],
+    end_date: [localStorage.getItem('date'), Validators.required],
     adults: [1, Validators.required],
     children: [0, Validators.required],
   });
@@ -93,10 +93,12 @@ export class ReserveAccommodationComponent implements OnInit {
           if(status.status == 200) {
             console.log(status.status);
             this.ns.showNotification("success", "Sikeres foglalás", 1200);
+            this.router.navigate(['reserved-accommodations']);
           }
           if(status.status == 409) {
             console.log(status.status);
             this.ns.showNotification("error", "Már foglalát időpontot", 1200);
+            this.router.navigate(['reserved-accommodations']);
           }
         });
 
@@ -114,6 +116,6 @@ export class ReserveAccommodationComponent implements OnInit {
 
   backButton() {
     this.router.navigate(['search'], 
-    { queryParams: { filter: localStorage.getItem('filter'), page: localStorage.getItem('page')}})
+    { queryParams: { filter: localStorage.getItem('filter'), page: localStorage.getItem('page'), date: localStorage.getItem('date')}})
   }
 }

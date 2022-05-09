@@ -21,15 +21,30 @@ export class SearchService {
         this.idArray.push(this.accommodations[i].id);*/
 
   
-  //FONTOS: url-t majd átirni (levenni a +3at)
-  getAccommodationsBySearch(filterText: string): Observable<Accommodation[]> {
+  getAccommodationsBySearch(filterText: string, date: string): Observable<Accommodation[]> {
     let accommodations;
-    if (filterText) {
+    if (filterText && date) {
+      const modifiedFilterText = filterText.charAt(0).toUpperCase() + filterText.slice(1).toLowerCase();
+      accommodations = this.http.get<Accommodation[]>('/api/search/',
+        {
+          params: {
+            filter: modifiedFilterText,
+            date: date
+          },
+        });
+    } else if (filterText) {
       const modifiedFilterText = filterText.charAt(0).toUpperCase() + filterText.slice(1).toLowerCase();
       accommodations = this.http.get<Accommodation[]>('/api/search/',
         {
           params: {
             filter: modifiedFilterText
+          },
+        });
+    } else if (date) {
+      accommodations = this.http.get<Accommodation[]>('/api/search/',
+        {
+          params: {
+            date: date
           },
         });
     } else {

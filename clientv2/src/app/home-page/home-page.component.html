@@ -1,1 +1,38 @@
-<p>home-page works!</p>
+<div class="textarea" fxLayout="column" fxLayoutAlign="start start">
+    <p class="first-line">Legyen Ön is <b>Partner</b></p>
+    <p class="second-line">itt kiadhatja a megüresedett nyaralóhelyeit ,</p>
+    <p class="third-line"><mark routerLink="/information">kattintson ide</mark> a kezdéshez .</p>
+    <p class="first-line">Csak böngészni jött ?</p>
+    <p class="second-line">
+        <mark *ngIf="!isLoggedIn" routerLink="/auth/register">regisztráljon</mark>
+        <mark *ngIf="isLoggedIn">regisztráljon</mark>
+        vagy
+        <mark *ngIf="!isLoggedIn" routerLink="/auth/login">jelentkezzen be</mark>
+        <mark *ngIf="isLoggedIn">jelentkezzen be</mark>
+        és lefoglalhatja
+    </p>
+    <p class="third-line">a megkedvelt <b class="thin-bold">szállásokat</b> .</p>
+</div>
+<p class="title">Ajánlott úticélok</p>
+<div class="alt-search">
+    <mat-grid-list cols="3" rowHeight="1:1">
+        <mat-grid-tile class="left-tile" [routerLink]="['search']" [queryParams]="{filter: 'Budapest'}">
+            <img src="assets/img/budapest.jpg" alt="budapest" layout-fill>
+            <mat-grid-tile-footer>
+                Budapest
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile class="middle-tile" [routerLink]="['search']" [queryParams]="{filter: 'Siófok'}">
+            <img src="assets/img/siofok.jpg" alt="siofok" layout-fill>
+            <mat-grid-tile-footer>
+                Siófok
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile class="right-tile" [routerLink]="['search']" [queryParams]="{filter: 'Hévíz'}">
+            <img src="assets/img/heviz.jpg" alt="heviz" layout-fill>
+            <mat-grid-tile-footer>
+                Hévíz
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
