@@ -4,20 +4,20 @@
     </mat-option>
 </mat-autocomplete>
 
-<mat-toolbar class="searchbar-container">
+<mat-toolbar class="searchbar-container" fxLayout="column" fxLayoutAlign="center start">
     <mat-toolbar class="searchbar">
         <input class="search" matInput type="text" name="search" [formControl]="myControl" [matAutocomplete]="auto"
             onfocus="this.select()" placeholder="Írja be az úticélt" [(ngModel)]="searchText" />
 
         <mat-divider [vertical]="true"></mat-divider>
 
-        <input class="date" matInput [(ngModel)]="dateText1" [matDatepicker]="picker1" (dateChange)="date1Changed()"
-            placeholder="Érkezés napja">
+        <input class="date" matInput [(ngModel)]="dateText1" [min]="myDate" [matDatepicker]="picker1"
+            (dateChange)="date1Changed()" placeholder="Érkezés napja">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1 color="primary"></mat-datepicker>
 
-        <input class="date" matInput [(ngModel)]="dateText" [matDatepicker]="picker2" [min]="this.dateText1"
-            placeholder="Távozás napja">
+        <input class="date" matInput [(ngModel)]="dateText" [disabled]="dateText1 == ''" [matDatepicker]="picker2"
+            [min]="this.dateText1" placeholder="Távozás napja">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2 color="primary"></mat-datepicker>
 
@@ -35,8 +35,10 @@
             (click)="clearSearch()">Keresés</button>
 
     </mat-toolbar>
-    <!--<button mat-button class="search-button-alternative">Legkedveltebb szállások</button>
-    <button mat-button class="search-button-alternative-slim1" (click)="randomIdButton()">Válassz nekem!</button>
-    <button mat-button class="search-button-alternative-slim2" (click)="randomIdWithFilterButton()">Válassz úticél
-        szerint!</button>-->
+    <div class="button-container" fxLayout="row" fxLayoutAlign="end end">
+        <!--<button mat-button class="search-button-alternative">Legkedveltebb szállások</button>-->
+        <button mat-button class="random" (click)="randomIdButton()"> <mat-icon>search</mat-icon> Válassz nekem szállást!</button>
+        <button mat-button class="random" (click)="randomIdWithFilterButton()"> <mat-icon>search</mat-icon> Válassz úticél
+            szerint!</button>
+    </div>
 </mat-toolbar>

@@ -67,7 +67,7 @@ export class ReserveAccommodationComponent implements OnInit {
   fetchData(): void {
     this.as.getAccommodationById(this.accommodationId).subscribe(
       (response) => {
-        this.accommodation = response;;
+        this.accommodation = response;
       },
       (error) => {
         console.log(error);

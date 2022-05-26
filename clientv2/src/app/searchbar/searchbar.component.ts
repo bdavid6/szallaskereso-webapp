@@ -3,6 +3,9 @@ import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { SearchService } from '../core/services/search.service';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../core/services/auth.service';
+import { NotificationService } from '../core/services/notification.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -11,15 +14,24 @@ import { DatePipe } from '@angular/common';
 })
 export class SearchbarComponent implements OnInit {
 
+  myDate = new Date(new Date().setMonth(new Date().getMonth()))
+  myDate2 = new Date(new Date().setMonth(new Date().getMonth()))
+
+  random!: number;
+  idArray: number[] = [];
+
   myControl = new FormControl();
   searchText = '';
-  dateText = '';
-  dateText1 = '';
+  dateText = ''; // távozás
+  dateText1 = ''; // érkezés
   filteredOptions?: Observable<string[]>
 
   constructor(
     private ss: SearchService,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private router: Router,
+    private ahs: AuthService,
+    private ns: NotificationService
   ) {
     this.fetchData();
   }
@@ -31,11 +43,31 @@ export class SearchbarComponent implements OnInit {
     );
   }
 
-  fetchData(): void {
+  /*fetchData(): void {
     this.ss.getAccommodationsBySearch('', '').subscribe(
       (response) => {
         for (let i = 0; i < response.length; i++) {
           this.ss.options.push(response[i].place)
+        }
+      },
+      (error) => {
+        console.log(error);
+      });
+  }*/
+
+  fetchData(): void {
+    this.ss.getAccommodationsBySearch('', '').subscribe(
+      (response) => {
+        for (let i = 0; i < response.length; i++) {
+          let included = false;
+          for (let j = 0; j < i; j++) {
+            if (response[i].place == this.ss.options[j]) {
+              included = true;
+            }
+          }
+          if (!included) {
+            this.ss.options.push(response[i].place)
+          }
         }
       },
       (error) => {
@@ -61,78 +93,100 @@ export class SearchbarComponent implements OnInit {
 
   date1Changed(): void {
     const date1 = this.datepipe.transform(this.dateText1, 'yyyy-MM-dd');
-    if(this.dateText1 == null) {
+    if (this.dateText1 == null) {
       localStorage.setItem('date1', '');
     } else {
       localStorage.setItem('date1', String(date1));;
     }
+    //a távozási idő resetelése
+    this.dateText = '';
   }
 
   clearSearch() {
-    //this.searchText = '';
-    //this.dateText = '';
+    this.searchText = '';
+    this.dateText = '';
+    this.dateText1 = '';
   }
 
-  async randomIdButton(): Promise<void> {
-
-    /*this.ss.savedPage = -3;
+  randomIdButton(): void {
     if (this.ahs.isLoggedIn) {
-      this.idArray = await this.ss.getIdArray();
-      length = this.idArray.length;
+      localStorage.clear();
+      this.idArray = [];
+      this.ss.getAccommodationsBySearch('', '').subscribe(
+        (response) => {
+          //fill idArray
+          for (let i = 0; i < response.length; i++) {
+            this.idArray.push(response[i].id);
+          }
+          //pick a random
+          let length = this.idArray.length
+          if (length == 0) {
+            this.router.navigate(['/']);
+            this.ns.showNotification("error", "Nincs ilyen szállás", 1200);
 
-      if (length == 0) {
-        this.router.navigate(['/']);
+          } else if (length == 1) {
+            this.router.navigate(['/accommodations/' + this.idArray[0]]);
 
-      } else if (length == 1) {
-        this.router.navigate(['/accommodations/' + this.idArray[0]]);
-
-      } else {
-        let x = Math.floor(Math.random() * length);
-        while (this.random == x) {
-          x = Math.floor(Math.random() * length);
-        }
-        this.random = x;
-        this.router.navigate(['/accommodations/' + this.idArray[x]]);
-      }
-
+          } else {
+            let x = Math.floor(Math.random() * length);
+            while (this.random == x) {
+              x = Math.floor(Math.random() * length);
+            }
+            this.random = x;
+            this.router.navigate(['/accommodations/' + this.idArray[x]]);
+          }
+        },
+        (error) => {
+          console.log(error);
+        });
     } else {
-      this.ns.showNotification(1, "Bejelentkezés szükséges", 1200);
-    }*/
+      this.ns.showNotification("error", "Bejelentkezés szükséges", 1200);
+    }
   }
 
-  async randomIdWithFilterButton(): Promise<void> {
+  randomIdWithFilterButton(): void {
 
-    /*const filter = this.searchText.charAt(0).toUpperCase() + this.searchText.slice(1).toLowerCase();
+    const filter = this.searchText.charAt(0).toUpperCase() + this.searchText.slice(1).toLowerCase();
 
-    this.ss.savedPage = -3;
     if (this.ahs.isLoggedIn) {
 
       if (filter) {
-        this.idArray = await this.ss.getIdArrayWithFilter(filter);
-        length = this.idArray.length;
+        localStorage.clear();
+        this.idArray = [];
+        this.ss.getAccommodationsBySearch(filter, this.dateText).subscribe(
+          (response) => {
+            //fill idArray
+            for (let i = 0; i < response.length; i++) {
+              this.idArray.push(response[i].id);
+            }
+            //pick a random
+            let length = this.idArray.length
+            if (length == 0) {
+              this.router.navigate(['/']);
+              this.ns.showNotification("error", "Nincs ilyen szállás", 1200);
 
-        if (length == 0) {
-          this.router.navigate(['/']);
-          console.log("elso")
-        } else if (length == 1) {
-          this.router.navigate(['/accommodations/' + this.idArray[0]]);
-          console.log("masodik")
-        } else {
-          let x = Math.floor(Math.random() * length);
-          while (this.random == x) {
-            x = Math.floor(Math.random() * length);
-          }
-          this.random = x;
-          this.router.navigate(['/accommodations/' + this.idArray[x]]);
-          console.log("harmadik")
-        }
+            } else if (length == 1) {
+              this.router.navigate(['/accommodations/' + this.idArray[0]]);
+
+            } else {
+              let x = Math.floor(Math.random() * length);
+              while (this.random == x) {
+                x = Math.floor(Math.random() * length);
+              }
+              this.random = x;
+              this.router.navigate(['/accommodations/' + this.idArray[x]]);
+            }
+          },
+          (error) => {
+            console.log(error);
+          });
 
       } else {
-        this.ns.showNotification(1, "Adjon meg egy úticélt", 1200);
+        this.ns.showNotification("error", "Adjon meg egy úticélt", 1200);
       }
     } else {
-      this.ns.showNotification(1, "Bejelentkezés szükséges", 1200);
+      this.ns.showNotification("error", "Bejelentkezés szükséges", 1200);
     }
-    this.clearSearch();*/
+    this.clearSearch();
   }
 }

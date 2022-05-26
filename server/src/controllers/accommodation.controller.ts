@@ -60,16 +60,28 @@ accommodationRouter
     .post('/', async (req, res) => {
         const accommodation = new Accommodation();
 
-        wrap(accommodation).assign(req.body, { em: req.orm.em });
+        //wrap(accommodation).assign(req.body, { em: req.orm.em });
+        accommodation.name = req.body.name;
+        accommodation.phone_number = req.body.phone_number;
+        accommodation.description = req.body.description;
+        accommodation.information = req.body.information;
+        accommodation.services = req.body.services;
+        accommodation.adult_price = req.body.adult_price;
+        accommodation.child_price = req.body.child_price;
         accommodation!.user = req.orm.em.getReference(User, req.user!.id);
 
         const place = req.body.place;
         const modifiedPlace = place.charAt(0).toUpperCase() + place.slice(1).toLowerCase();
         accommodation.place = modifiedPlace;
 
+        if (req.body.res_end_date) {
+            accommodation.res_end_date = new Date(req.body.res_end_date);
+        } else {
+            //maximum: explicit dátum
+            accommodation.res_end_date = new Date('2025-01-01');
+        }
+
         accommodation.confirmed = true;
-        accommodation.res_end_date = new Date(req.body.res_end_date);
-        console.log(accommodation.res_end_date)
 
         await req.accommodationRepository!.persistAndFlush(accommodation);
         res.sendStatus(200);
@@ -85,7 +97,7 @@ accommodationRouter
         } else {
             if (accommodation.active) {
                 accommodation.active = false;
-                
+
             } else {
                 accommodation.active = true;
             }

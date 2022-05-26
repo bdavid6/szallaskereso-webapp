@@ -105,6 +105,7 @@ export class AuthService {
 
   logout(): void {
     this.setUser(null);
+    localStorage.clear();
   }
 
   private setUser(user: LoginResponse | null): void {

@@ -21,7 +21,6 @@ export class User {
     e_mail!: string;
 
     @Enum()
-    //role!: Role;
     role: Role = Role.MEMBER;
 
     @OneToMany(() => Accommodation, accommodation => accommodation.user)

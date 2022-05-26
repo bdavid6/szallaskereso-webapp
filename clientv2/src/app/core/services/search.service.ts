@@ -8,8 +8,6 @@ import { Accommodation } from '../interfaces/accommodation';
 })
 export class SearchService {
 
-  clicked: boolean = false;
-
   options: string[] = [];
   
   constructor(
