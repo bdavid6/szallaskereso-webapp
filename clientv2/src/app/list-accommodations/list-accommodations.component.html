@@ -1,4 +1,4 @@
-<div class="pagination" fxLayoutAlign="end center">
+<!--<div class="pagination" fxLayoutAlign="end center">
     <pagination-controls previousLabel="Előző" nextLabel="Következő" (pageChange)="onDataChange($event)">
     </pagination-controls>
 </div>
@@ -34,5 +34,52 @@
         <button *ngIf="isLoggedIn" mat-button [routerLink]="['../accommodations/' + acco.id]" (click)="save()">MEGTEKINTÉS</button>
         <button *ngIf="!isLoggedIn" mat-button matTooltip="Bejelentkezés szükséges" matTooltipPosition="right"
             class="disabled" (click)="alert()">MEGTEKINTÉS</button>
+    </div>
+    <button (click)="filter()">dsdsd</button>
+</div>-->
+<div class="pagination" fxLayoutAlign="end center">
+    <pagination-controls previousLabel="Előző" nextLabel="Következő" (pageChange)="onDataChange($event)">
+    </pagination-controls>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="55">
+    <div class="card" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10" *ngFor="
+        let acco of accommodations | paginate: {
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: itemCount };">
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10">
+            <div class="bal" fxLayout="column" fxLayoutAlign="end start">
+                <div class="bal1" fxLayout="column" fxLayoutAlign="center start">
+                    <p class="name">{{(acco.name.length > 25) ? (acco.name | slice:0:25) + '...' : acco.name}}</p>
+                    <p class="place">{{(acco.place.length > 30) ? (acco.place | slice:0:30) + '...' : acco.place}}</p>
+                </div>
+                <div><img src="./assets/img/budapest.jpg"></div>
+            </div>
+
+            <div class="jobb" fxLayout="column" fxLayoutAlign="start">
+                <div class="elsosor" fxLayout="column" fxLayoutAlign="start">
+                    <p class="cim">Leírás:</p>
+                    <p class="content">{{acco.description}}</p>
+                </div>
+
+                <div class="masodiksor" fxLayout="column" fxLayoutAlign="start">
+                    <p class="cim">Információk:</p>
+                    <p class="content">{{acco.information}}</p>
+                </div>
+
+                <div class="harmadiksor" fxLayout="column" fxLayoutAlign="start">
+                    <p class="cim">Szolgáltatások:</p>
+                    <div class="services" fxLayout="row" fxLayoutAlign="start start">
+                        <mat-chip-list *ngFor="let service of acco.services">
+                            <mat-chip color="accent" selected>{{service}}</mat-chip>
+                        </mat-chip-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button *ngIf="isLoggedIn" mat-button [routerLink]="['../accommodations/' + acco.id]" (click)="save()">MEGTEKINTÉS</button>
+        <button *ngIf="!isLoggedIn" mat-button matTooltip="Bejelentkezés szükséges" matTooltipPosition="right"
+        class="disabled" (click)="alert()">MEGTEKINTÉS</button>
     </div>
 </div>

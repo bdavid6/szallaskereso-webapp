@@ -1,4 +1,4 @@
-.services {
+/*.services {
     flex-wrap: wrap;
 }
 
@@ -25,10 +25,10 @@ img {
 }
 
 .card {
-    min-height: 780px;
-    max-height: 780px;
-    min-width: 350px;
-    max-width: 350px;
+    min-height: 380px;
+    max-height: 380px;
+    min-width: 850px;
+    max-width: 850px;
     border: 1px solid black;
     margin-bottom: 30px;
 }
@@ -171,4 +171,257 @@ mat-icon {
     margin-left: 50px;
     transform: scale(1.2);
     color: rgba(20, 104, 58, 0.877);
+}*/
+
+mat-chip {
+    flex: 1 0 21%;
+    margin: 5px;
+    height: 30px !important;
+    font-size: small;
+}
+
+.pagination {
+    max-height: 55px;
+}
+
+img {
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 348px;
+    max-width: 348px;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.cards {
+    max-width: 850px;
+}
+
+.card {
+    min-height: 379px;
+    max-height: 379px;
+    min-width: 850px;
+    max-width: 850px;
+    border-radius: 2px;
+    border: 1px solid black;
+    margin-bottom: 30px;
+    box-shadow: 0 0px 0 1px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2), inset 0px 7px 0px rgba(20, 104, 58, 0.877);
+}
+
+p {
+    font-size: large;
+    font-weight: lighter;
+    margin-left: 10px;
+}
+
+.bal {
+    margin-top: 7px;
+}
+
+.bal1 {
+    width: 100%;
+    border-right: 1px dashed black;
+}
+
+.name {
+    margin-top: 15px;
+    margin-left: 10px;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.place {
+    margin-top: -10px;
+    margin-left: 20px;
+    font-size: medium;
+    font-style: italic;
+}
+
+.jobb {
+    min-width: 460px;
+    max-width: 460px;
+
+    ::-webkit-scrollbar {
+        width: 4px !important;
+        overflow-y: auto !important;
+        //background: white !important;
+        //box-shadow: inset 0 0 4px #707070 !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px white;
+        height: 100px;
+        border-radius: 10px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgba(20, 104, 58, 0.877);
+        border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(57, 185, 115, 0.877);
+    }
+}
+
+.cim {
+    font-weight: 500;
+    margin-left: -1px;
+    border-bottom: 1px solid rgba(20, 104, 58, 0.877);
+}
+
+.content {
+    //margin-top: -15px;
+    min-height: 60px;
+    overflow-y: auto;
+}
+
+.elsosor {
+    margin-top: 30px;
+    max-width: 100%;
+    min-height: 120px;
+    max-height: 120px;
+    margin-left: 5px;
+}
+
+.masodiksor {
+    margin-top: 5px;
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 100px;
+    margin-left: 5px;
+}
+
+.harmadiksor {
+    margin-top: 5px;
+    max-width: 100%;
+    margin-left: 5px;
+    //margin-top: -3px;
+    max-height: 100px;
+}
+
+.services {
+    flex-wrap: wrap;
+    max-height: 70px;
+    min-height: 70px;
+    overflow-y: auto;
+}
+
+.backbuttoncontainer {
+    min-width: 850px;
+    max-width: 850px;
+}
+
+button {
+    align-self: flex-start;
+    border: 1px solid black;
+}
+
+.moreinfo {
+    min-height: 250px;
+    max-height: 250px;
+    min-width: 850px;
+    max-width: 850px;
+    border-radius: 2px;
+    background-color: #F5F5F5;
+    border: 1px solid black;
+    margin-bottom: 300px;
+    //box-shadow: 0 0 0 1px rgba(0, 0, 0, .2), 0 1px 1px rgba(0, 0, 0, .2), inset 0 1px 1px rgba(255, 255, 255, .7);
+    box-shadow: 0 0px 0 1px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2)
+}
+
+.oszlop1 {
+    border-right: 2px dashed rgba(20, 104, 58, 0.877);
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 245px;
+    max-height: 245px;
+}
+
+.oszlop2 {
+    margin-left: 20px;
+    border-right: 2px dashed rgba(20, 104, 58, 0.877);
+    min-width: 270px;
+    max-width: 270px;
+    min-height: 245px;
+    max-height: 245px;
+}
+
+.name1 {
+    margin-top: 15px;
+    font-size: x-large;
+    font-weight: 500;
+    color: rgba(20, 104, 58, 0.877);
+}
+
+.prices {
+    min-height: 30px;
+    max-height: 30px;
+}
+
+.cim1 {
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.sor1 {
+    max-width: 348px;
+    min-height: 30px;
+    max-height: 30px;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+mat-form-field {
+    width: 90px;
+    height: 60px;
+    font-weight: 500;
+}
+
+.picker {
+    width: 250px;
+}
+
+.oszlop3 {
+    margin-left: 20px;
+    min-width: 180px;
+    max-width: 180px;
+    min-height: 245px;
+    max-height: 245px;
+}
+
+.árbox {
+    width: 150px;
+    height: 70px;
+}
+
+.ár {
+    margin-top: 15px;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: large;
+    font-style: italic;
+    color: black;
+}
+
+.reserve {
+    background-color: rgba(20, 104, 58, 0.877);
+    color: white;
+    height: 80px;
+    width: 170px;
+    font-weight: 500;
+}
+
+.arrow {
+    margin-left: 5px;
+    font-weight: 800;
+}
+
+button:hover {
+    background-color: rgba(9, 128, 62, 0.877);
 }

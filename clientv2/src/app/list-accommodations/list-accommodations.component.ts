@@ -14,6 +14,10 @@ export class ListAccommodationsComponent implements OnInit {
 
   accommodations?: any;
 
+  filteredAccommodations: any[] = [];
+
+  filterArray: string[] = ["állatbarát", "szobaszerviz"]
+
   filterText = '';
 
   dateText = '';
@@ -55,6 +59,25 @@ export class ListAccommodationsComponent implements OnInit {
       });
   }
 
+  filter(): void {
+    if (this.accommodations) {
+      let counter = 0;
+      for (let i = 0; i < this.accommodations.length; i++) {
+        for (let j = 0; j < this.accommodations[i].services.length; j++) {
+          for (let z = 0; z < this.filterArray.length; z++) {
+            if (this.accommodations[i].services[j] == this.filterArray[z]) {
+              counter++;
+            }
+          }
+        }
+        if(counter == this.filterArray.length) {
+          this.filteredAccommodations.push(this.accommodations[i+1]);
+          console.log(counter)
+        }
+      }
+    }
+  }
+
   onDataChange(event: any) {
     this.page = event;
     this.fetchData();
@@ -66,17 +89,17 @@ export class ListAccommodationsComponent implements OnInit {
 
   save(): void {
     //vissza gombhoz elmenteni
-    if(this.filterText == undefined) {
+    if (this.filterText == undefined) {
       localStorage.setItem('filter', '');
     } else {
       localStorage.setItem('filter', this.filterText);
     }
-    if(this.dateText == undefined) {
+    if (this.dateText == undefined) {
       localStorage.setItem('date', '');
     } else {
       localStorage.setItem('date', this.dateText);
     }
-    if(this.page == undefined) {
+    if (this.page == undefined) {
       localStorage.setItem('page', '1');
     } else {
       localStorage.setItem('page', String(this.page));

@@ -23,6 +23,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +42,8 @@ import { ListAccommodationsComponent } from './list-accommodations/list-accommod
 import { ReserveAccommodationComponent } from './reserve-accommodation/reserve-accommodation.component';
 import { ErrorsPipe } from './core/pipes/errors.pipe';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { ConfirmAccommodationsComponent } from './confirm-accommodations/confirm-accommodations.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +59,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     ListAccommodationsComponent,
     ReserveAccommodationComponent,
     ErrorsPipe,
+    ConfirmAccommodationsComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +87,10 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     MatGridListModule,
     MatTabsModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

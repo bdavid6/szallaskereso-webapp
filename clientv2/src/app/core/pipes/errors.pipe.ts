@@ -14,14 +14,21 @@ export class ErrorsPipe implements PipeTransform {
       return `Mimumum
         ${value.minlength.requiredLength} karakter hosszú legyen.`;
     }
+    if (value.maxlength) {
+      return `Maximum
+        ${value.maxlength.requiredLength} karakter hosszú legyen.`;
+    }
+    if (value.pattern) {
+      return `Csak számokat tartalmazhat.`;
+    }
     if (value.email) {
       return 'Hiányzó karakter @...';
     }
     if (value.min) {
-      return 'Rossz érték!';
+      return 'Az érték túl kicsi!';
     }
     if (value.max) {
-      return 'Rossz érték!';
+      return 'Az érték túl nagy!';
     }
     return JSON.stringify(value);
   }

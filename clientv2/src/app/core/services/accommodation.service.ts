@@ -20,15 +20,23 @@ export class AccommodationService {
     return this.http.post<Accommodation>('/api/accommodations', accommodation);
   }
 
-  /*getReservedAccommodations(): Observable<Accommodation[]> {
-    return this.http.get<Accommodation[]>('/api/reservations');
-  }*/
-
   getCreatedAccommodations(): Observable<Accommodation[]> {
-    return this.http.get<Accommodation[]>('/api/accommodations');
+    return this.http.get<Accommodation[]>('/api/accommodations/all/MEMBER');
   }
 
   changeAccommodationStatus(accommodationId: number): Observable<Accommodation> {
     return this.http.put<Accommodation>('/api/accommodations/' + accommodationId, '');
+  }
+
+  confirmAccommodations(): Observable<Accommodation[]> {
+    return this.http.get<Accommodation[]>('/api/accommodations/all/ADMIN');
+  }
+
+  deleteAccommodationById(accommodationId: number): Observable<Accommodation> {
+    return this.http.delete<Accommodation>('/api/accommodations/' + accommodationId);
+  }
+
+  confirmAccommodation(accommodationId: number): Observable<Accommodation> {
+    return this.http.put<Accommodation>('/api/accommodations/confirm/' + accommodationId, '');
   }
 }

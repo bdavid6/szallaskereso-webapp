@@ -19,6 +19,10 @@ p {
     text-align: center;
 }
 
+.notactive {
+    background-color: rgba(221, 120, 120, 0.842);
+}
+
 table {
     min-width: 600px;
     text-align: left;
@@ -27,4 +31,35 @@ table {
 .delete-icon {
     cursor: pointer;
     color: firebrick;
+}
+
+mat-divider {
+    margin-top: 30px;
+    width: 70%;
+}
+
+.second {
+    margin-top: 10px;
+}
+
+mat-form-field {
+    min-width: 350px;
+}
+
+mat-select {
+    min-height: 25px;
+    max-height: 25px;
+    font-size: large;
+}
+
+mat-hint {
+    font-size: medium;
+}
+
+button {
+    min-width: 180px;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    background-color: rgba(20, 104, 58, 0.877);
+    color: white;
 }

@@ -77,14 +77,14 @@
                 <div fxLayout="row" fxLayoutGap="10px">
                     <mat-form-field appearance="outline">
                         <mat-label>Felnőtt</mat-label>
-                        <input matInput type="number" name="adult_price" formControlName="adult_price" min="0" max="50000"/>
+                        <input matInput type="number" name="adult_price" formControlName="adult_price" min="1000" max="50000"/>
                         <mat-error *ngIf="adult_price.invalid">
                             {{ adult_price.errors! | appErrors }}
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Gyermek</mat-label>
-                        <input matInput type="number" name="child_price" formControlName="child_price" min="0" max="20000"/>
+                        <input matInput type="number" name="child_price" formControlName="child_price" min="1000" max="50000"/>
                         <mat-error *ngIf="child_price.invalid">
                             {{ child_price.errors! | appErrors }}
                         </mat-error>
@@ -98,7 +98,7 @@
                 </h3>
                 <mat-form-field appearance="outline">
                     <input matInput [min]="myDate" [matDatepicker]="picker" type="string" name="res_end_date"
-                        formControlName="res_end_date" placeholder="Minimum 3 hónap">
+                        formControlName="res_end_date" autocomplete="off" placeholder="Minimum 3 hónap">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker color="primary"></mat-datepicker>
                 </mat-form-field>

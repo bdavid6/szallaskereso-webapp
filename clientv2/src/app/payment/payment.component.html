@@ -1,0 +1,38 @@
+<form mat-dialog-content [formGroup]="paymentForm" (ngSubmit)="submit()">
+    <div class="card" fxLayout="column" fxLayoutAlign="start center" [class.disabled]="loading">
+        <mat-spinner *ngIf="loading"></mat-spinner>
+        <mat-form-field class="big1" appearance="outline">
+            <input matInput type="text" name="cardnumber" formControlName="cardnumber" placeholder="Kártyaszám" />
+            <mat-error *ngIf="cardnumber.invalid">
+                {{ cardnumber.errors! | appErrors }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="big2" appearance="outline">
+            <input matInput type="text" name="name" formControlName="name" autocomplete="off"
+                placeholder="Tulajdonos neve" />
+            <mat-error *ngIf="name.invalid">
+                {{ name.errors! | appErrors }}
+            </mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field class="small1" appearance="outline">
+                <input matInput type="text" name="date" formControlName="date" placeholder="Lejárati dátum" />
+                <mat-error *ngIf="date.invalid">
+                    {{ date.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="small2" appearance="outline">
+                <input matInput type="text" name="cvc" formControlName="cvc" placeholder="CVC" />
+                <mat-error *ngIf="cvc.invalid">
+                    {{ cvc.errors! | appErrors }}
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-evenly center" [class.disabled]="loading">
+    <button class="button1" (click)="submit()" mat-raised-button>Fizetés</button>
+    <button class="button2" *ngIf="dialogRef" (click)="cancel()" mat-raised-button type="button">
+        Mégse
+    </button>
+</div>

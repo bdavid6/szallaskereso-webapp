@@ -7,8 +7,8 @@
     <button *ngIf="isLoggedIn && isAdmin" mat-button [matMenuTriggerFor]="adminmenu"
       class="admin-menu-button">Admin</button>
     <mat-menu #adminmenu="matMenu">
-      <button mat-menu-item>Új szállások ellenőrzése</button>
-      <button mat-menu-item>Népszerű úticélok beállítása</button>
+      <button mat-menu-item routerLink="/confirm-accommodations">Új szállások ellenőrzése</button>
+      <!--<button mat-menu-item>Népszerű úticélok beállítása</button>-->
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="partnermenu" class="partner-menu-button">Partnereknek</button>
     <mat-menu #partnermenu="matMenu">

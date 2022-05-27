@@ -1,17 +1,18 @@
-<div class="body" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+<div *ngIf="accommodations?.length != 0;else notfound" class="body" fxLayout="column" fxLayoutAlign="start center"
+    fxLayoutGap="20px">
     <h1><b>Kiadott szállásaim és foglalások</b></h1>
     <div class="text">
-      ~ itt tudja megtekinteni az összes szállását, válasszon ki egyet <br> és
+        ~ itt tudja megtekinteni az összes szállását, válasszon ki egyet <br> és
         már meg is jelennek a hozzá tartozó foglalások ~
     </div>
     <mat-accordion>
         <mat-expansion-panel *ngFor="let acco of accommodations">
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header [ngClass]="{'notactive' : !acco.active}">
                 <mat-panel-title fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon *ngIf="acco.active" class="active-on-icon" aria-hidden="false" aria-label="Active icon">
-                        done</mat-icon>
+                    <!--<mat-icon *ngIf="acco.active" class="active-on-icon" aria-hidden="false" aria-label="Active icon">
+                        done</mat-icon>-->
                     <mat-icon *ngIf="!acco.active" class="active-off-icon" aria-hidden="false" aria-label="Active icon">
-                        close
+                        visibility_off
                     </mat-icon>
                     <p>{{acco.name}}</p>
                 </mat-panel-title>
@@ -39,4 +40,27 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
+    <mat-divider></mat-divider>
+    <h1 class="second"><b>Szállások láthatatlanná tétele a keresés elől</b></h1>
+    <div class="text">
+        ~ itt tudja szükség esetén inaktiválni a szállását (vagy vissza aktiválni), <br>
+        fentebb látható a szállások mostani státusza ~
+    </div>
+    <mat-form-field appearance="outline">
+        <mat-select [formControl]="statusControl" placeholder="Válasszon egyet a szállások közül" required>
+            <option value="" selected></option>
+            <mat-option *ngFor="let acco of accommodations" [value]="acco">
+                {{acco.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="statusControl.hasError('required')"></mat-error>
+        <mat-hint>Település: {{statusControl.value?.place}}</mat-hint>
+    </mat-form-field>
+    <button (click)="changeStatus(statusControl.value?.id)" mat-raised-button>Státusz
+        változtatása</button>
 </div>
+<ng-template #notfound>
+    <div class="nf" fxLayoutAlign="center start">
+        <h1>Ön még nem <b>Partner.</b></h1>
+    </div>
+</ng-template>

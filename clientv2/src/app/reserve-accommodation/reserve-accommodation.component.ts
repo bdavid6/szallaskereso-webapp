@@ -6,6 +6,8 @@ import { AccommodationService } from '../core/services/accommodation.service';
 import { DatePipe } from '@angular/common'
 import { ReservationService } from '../core/services/reservation.service';
 import { NotificationService } from '../core/services/notification.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PaymentComponent } from '../payment/payment.component';
 
 @Component({
   selector: 'app-reserve-accommodation',
@@ -18,11 +20,6 @@ export class ReserveAccommodationComponent implements OnInit {
   accommodation?: Accommodation
 
   accommodationId!: number;
-
-  //csak a fake paymenthez kellenek (csak kinétezhez vannak)
-  cardnum?: string = '';
-  carddate?: string = '';
-  cardcvc?: string = '';
 
   reserveForm: FormGroup = this.fb.group({
     start_date: [localStorage.getItem('date1'), Validators.required],
@@ -54,7 +51,8 @@ export class ReserveAccommodationComponent implements OnInit {
     private datepipe: DatePipe,
     private rs: ReservationService,
     private ns: NotificationService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +73,9 @@ export class ReserveAccommodationComponent implements OnInit {
   }
 
   reserveButton(formDirective: FormGroupDirective): void {
+    /*const dialogRef = this.dialog.open(PaymentComponent, {
+      height: '380px',
+    });
     let transformedStartDate = this.datepipe.transform(this.reserveForm.controls['start_date'].value, 'yyyy-MM-dd');
     this.reserveForm.controls['start_date'].setValue(transformedStartDate);
     let transformedEndDate = this.datepipe.transform(this.reserveForm.controls['end_date'].value, 'yyyy-MM-dd');
@@ -109,6 +110,53 @@ export class ReserveAccommodationComponent implements OnInit {
       this.carddate = '';
       this.cardcvc = '';
 
+    } else {
+      return;
+    }*/
+    let transformedStartDate = this.datepipe.transform(this.reserveForm.controls['start_date'].value, 'yyyy-MM-dd');
+    this.reserveForm.controls['start_date'].setValue(transformedStartDate);
+    let transformedEndDate = this.datepipe.transform(this.reserveForm.controls['end_date'].value, 'yyyy-MM-dd');
+    this.reserveForm.controls['end_date'].setValue(transformedEndDate);
+
+    //send
+    this.reserveForm.markAllAsTouched();
+    if (this.reserveForm.valid) {
+
+      const dialogRef = this.dialog.open(PaymentComponent, {
+        height: '380px',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(result == 'true') {
+          
+          this.rs.reserveAccommodation(this.reserveForm.value, this.accommodation!.id).subscribe(
+            (response) => { },
+            (status: any) => {
+              if(status.status == 405) {
+                console.log(status.status);
+                this.ns.showNotification("error", "Ez a te szállásod", 1800);
+              }
+              if(status.status == 200) {
+                console.log(status.status);
+                this.ns.showNotification("success", "Sikeres foglalás", 1200);
+                this.router.navigate(['reserved-accommodations']);
+              }
+              if(status.status == 409) {
+                console.log(status.status);
+                this.ns.showNotification("error", "Már foglalát időpontot", 1800);
+                this.router.navigate(['reserved-accommodations']);
+              }
+            });
+        }
+        //reset
+        formDirective.resetForm();
+        this.reserveForm.reset({
+          'adults': 1,
+          'children': 0,
+          'start_date': '',
+          'end_date': '',
+         });
+      });
     } else {
       return;
     }

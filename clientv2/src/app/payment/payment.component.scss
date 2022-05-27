@@ -1,0 +1,71 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.card {
+    width: 400px;
+    height: 270px;
+    align-self: center;
+    border-radius: 8px;
+    border: 1px solid black;
+    box-shadow: inset 0px 25px 0px rgba(20, 104, 58, 0.877);
+}
+
+mar-form-field {
+    align-self: center;
+}
+
+.small1 {
+    width: 150px;
+    margin-right: 20px;
+}
+
+.small2 {
+    width: 150px;
+}
+
+.big1 {
+    min-width: 80%;
+    max-width: 80%;
+    height: 73px;
+    margin-top: 35px;
+}
+
+.big2 {
+    min-width: 80%;
+    max-width: 80%;
+    height: 73px;
+}
+
+.mat-dialog-actions {
+    margin-top: 20px;
+}
+
+button {
+    min-width: 180px;
+}
+
+.button1 {
+    background-color: rgba(20, 104, 58, 0.877);
+    color: white;
+}
+
+input::placeholder {
+    color: black;
+}
+
+mat-spinner {
+    margin-top: 50px;
+    position: absolute;
+    top: auto;
+    height: auto;
+    padding: inherit;
+}
+
+.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
