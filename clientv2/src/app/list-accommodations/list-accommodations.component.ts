@@ -14,13 +14,11 @@ export class ListAccommodationsComponent implements OnInit {
 
   accommodations?: any;
 
-  filteredAccommodations: any[] = [];
-
-  filterArray: string[] = ["állatbarát", "szobaszerviz"]
-
   filterText = '';
 
   dateText = '';
+
+  services: string[] = [];
 
   page: number = 1;
 
@@ -45,6 +43,7 @@ export class ListAccommodationsComponent implements OnInit {
         this.filterText = params.filter;
         this.dateText = params.date;
         this.page = params.page;
+        this.services = params.services;
         this.fetchData();
       });
   }
@@ -52,30 +51,59 @@ export class ListAccommodationsComponent implements OnInit {
   fetchData(): void {
     this.ss.getAccommodationsBySearch(this.filterText, this.dateText).subscribe(
       (response) => {
-        this.accommodations = response;
+        //this.accommodations = response;
+        this.accommodations = this.filter(response);
       },
       (error) => {
         console.log(error);
       });
   }
 
-  filter(): void {
-    if (this.accommodations) {
-      let counter = 0;
-      for (let i = 0; i < this.accommodations.length; i++) {
-        for (let j = 0; j < this.accommodations[i].services.length; j++) {
-          for (let z = 0; z < this.filterArray.length; z++) {
-            if (this.accommodations[i].services[j] == this.filterArray[z]) {
+  filter(array: any) {
+    if (this.services) {
+      let counter;
+      let filteredArray = [];
+      for (let i = 0; i < array.length; i++) {
+        counter = 0;
+        for (let j = 0; j < array[i].services.length; j++) {
+          for (let z = 0; z < this.services.length; z++) {
+            if (array[i].services[j] == this.services[z]) {
               counter++;
             }
           }
         }
-        if(counter == this.filterArray.length) {
-          this.filteredAccommodations.push(this.accommodations[i+1]);
-          console.log(counter)
+        if (counter == this.services.length) {
+          filteredArray.push(array[i]);
         }
       }
+      return filteredArray;
+    } else {
+      return array;
     }
+    /*if (this.services) {
+      let counter;
+      this.filteredAccommodations = [];
+      for (let i = 0; i < response.length; i++) {
+        counter = 0;
+        for (let j = 0; j < response[i].services.length; j++) {
+          for (let z = 0; z < this.servicesss.length; z++) {
+            if (response[i].services[j] == this.servicesss[z]) {
+              counter++;
+              console.log("counter")
+            }
+          }
+        }
+        if (counter == this.servicesss.length) {
+          this.filteredAccommodations.push(response[i]);
+        }
+      }
+      this.accommodations = this.filteredAccommodations;
+      console.log(this.filteredAccommodations)
+    } else {
+      this.accommodations = response;
+      this.accommodations = response;
+      return;
+    }*/
   }
 
   onDataChange(event: any) {
@@ -104,5 +132,6 @@ export class ListAccommodationsComponent implements OnInit {
     } else {
       localStorage.setItem('page', String(this.page));
     }
+    localStorage.setItem('services', JSON.stringify(this.services));
   }
 }

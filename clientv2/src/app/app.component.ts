@@ -27,4 +27,8 @@ export class AppComponent {
     this.ahs.logout();
     this.router.navigate(['auth/login']);
   }
+
+  click(): void {
+    localStorage.clear();
+  }
 }

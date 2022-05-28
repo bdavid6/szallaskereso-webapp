@@ -17,7 +17,7 @@ import { PaymentComponent } from '../payment/payment.component';
 export class ReserveAccommodationComponent implements OnInit {
   myDate = new Date(new Date().setMonth(new Date().getMonth()))
 
-  accommodation?: Accommodation
+  accommodation?: Accommodation;
 
   accommodationId!: number;
 
@@ -127,21 +127,21 @@ export class ReserveAccommodationComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if(result == 'true') {
-          
+        if (result == 'true') {
+
           this.rs.reserveAccommodation(this.reserveForm.value, this.accommodation!.id).subscribe(
             (response) => { },
             (status: any) => {
-              if(status.status == 405) {
+              if (status.status == 405) {
                 console.log(status.status);
                 this.ns.showNotification("error", "Ez a te szállásod", 1800);
               }
-              if(status.status == 200) {
+              if (status.status == 200) {
                 console.log(status.status);
                 this.ns.showNotification("success", "Sikeres foglalás", 1200);
                 this.router.navigate(['reserved-accommodations']);
               }
-              if(status.status == 409) {
+              if (status.status == 409) {
                 console.log(status.status);
                 this.ns.showNotification("error", "Már foglalát időpontot", 1800);
                 this.router.navigate(['reserved-accommodations']);
@@ -155,7 +155,7 @@ export class ReserveAccommodationComponent implements OnInit {
           'children': 0,
           'start_date': '',
           'end_date': '',
-         });
+        });
       });
     } else {
       return;
@@ -163,7 +163,13 @@ export class ReserveAccommodationComponent implements OnInit {
   }
 
   backButton() {
-    this.router.navigate(['search'], 
-    { queryParams: { filter: localStorage.getItem('filter'), page: localStorage.getItem('page'), date: localStorage.getItem('date')}})
+    this.router.navigate(['search'],
+      {
+        queryParams: {
+          filter: localStorage.getItem('filter'), page: localStorage.getItem('page'), date: localStorage.getItem('date'),
+          services: JSON.parse(localStorage.getItem("services")!)
+        }
+      })
+    localStorage.clear();
   }
 }

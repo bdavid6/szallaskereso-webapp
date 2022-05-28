@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { SearchService } from '../core/services/search.service';
 import { DatePipe } from '@angular/common';
@@ -13,6 +13,27 @@ import { NotificationService } from '../core/services/notification.service';
   styleUrls: ['./searchbar.component.scss']
 })
 export class SearchbarComponent implements OnInit {
+
+  filterForm!: FormGroup;
+  servicesData = [
+    { type: 'ingyen wifi' },
+    { type: 'saját parkoló' },
+    { type: 'edzőterem' },
+    { type: 'étterem' },
+    { type: 'akadálymentesített' },
+    { type: 'állatbarát' },
+    { type: 'medence' },
+    { type: 'szauna' },
+    { type: 'wellness' },
+    { type: 'vízparti' },
+    { type: 'esemény szervezés' },
+    { type: 'gyerekprogramok' },
+    //szoba
+    { type: 'szobaszerviz' },
+    { type: 'légkondi' },
+    { type: 'tv' },
+    { type: 'felszerelt konyha' },
+  ];
 
   myDate = new Date(new Date().setMonth(new Date().getMonth()))
   myDate2 = new Date(new Date().setMonth(new Date().getMonth()))
@@ -31,7 +52,8 @@ export class SearchbarComponent implements OnInit {
     private datepipe: DatePipe,
     private router: Router,
     private ahs: AuthService,
-    private ns: NotificationService
+    private ns: NotificationService,
+    private fb: FormBuilder
   ) {
     this.fetchData();
   }
@@ -41,6 +63,10 @@ export class SearchbarComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+
+    this.filterForm = this.fb.group({
+      services: this.fb.array([]),
+    });
   }
 
   /*fetchData(): void {
@@ -54,6 +80,17 @@ export class SearchbarComponent implements OnInit {
         console.log(error);
       });
   }*/
+
+  //filterForm onchange
+  onChange(services: string, isChecked: boolean) {
+    const checkedServices = (this.filterForm.controls.services as FormArray);
+    if (isChecked) {
+      checkedServices.push(new FormControl(services));
+    } else {
+      const index = checkedServices.controls.findIndex(x => x.value === services);
+      checkedServices.removeAt(index);
+    }
+  }
 
   fetchData(): void {
     this.ss.getAccommodationsBySearch('', '').subscribe(
@@ -91,6 +128,10 @@ export class SearchbarComponent implements OnInit {
     return String(date);
   }
 
+  servicesText(): string {
+    return this.filterForm.get('services')!.value;
+  }
+
   date1Changed(): void {
     const date1 = this.datepipe.transform(this.dateText1, 'yyyy-MM-dd');
     if (this.dateText1 == null) {
@@ -103,9 +144,9 @@ export class SearchbarComponent implements OnInit {
   }
 
   clearSearch() {
-    this.searchText = '';
+    /*this.searchText = '';
     this.dateText = '';
-    this.dateText1 = '';
+    this.dateText1 = '';*/
   }
 
   randomIdButton(): void {
