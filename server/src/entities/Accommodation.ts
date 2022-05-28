@@ -39,6 +39,9 @@ export class Accommodation {
     child_price!: number;
 
     @Property()
+    image!: string;
+
+    @Property()
     active: boolean = true;
 
     @Property()

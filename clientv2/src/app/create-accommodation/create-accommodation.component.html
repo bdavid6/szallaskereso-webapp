@@ -104,6 +104,19 @@
                 </mat-form-field>
             </div>
         </div>
+        <mat-divider></mat-divider>
+        <div class="filepicker" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-stroked-button type="button" (click)="filePicker.click()">Kép választás</button>
+            <input #filePicker type="file" (change)="onImagePick($event)">
+            <div class="imgprew">
+                <div *ngIf="imagePreview !== '' && imagePreview && validimage">
+                    <img [src]="imagePreview">
+                </div>
+                <p *ngIf="!(imagePreview !== '' && imagePreview && validimage)">
+                    <b>Jpg</b> vagy <b>Jpeg</b> formátumú kép kiválasztása kötelező!
+                </p>
+            </div>
+        </div>
         <button mat-raised-button>Beküldés</button>
     </form>
 </div>

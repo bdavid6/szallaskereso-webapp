@@ -13,6 +13,7 @@ export interface Accommodation {
     res_end_date: string;
     adult_price: number;
     child_price: number;
+    image: File;
     active: boolean;
     confirmed: boolean;
     user: User; //id

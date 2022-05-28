@@ -17,7 +17,19 @@ export class AccommodationService {
   }
 
   createAccommodation(accommodation: Accommodation): Observable<Accommodation> {
-    return this.http.post<Accommodation>('/api/accommodations', accommodation);
+    const formData = new FormData();
+    formData.append("name", accommodation.name)
+    formData.append("place", accommodation.place)
+    formData.append("phone_number", String(accommodation.phone_number))
+    formData.append("description", accommodation.description)
+    formData.append("information", accommodation.information)
+    formData.append("services", JSON.stringify(accommodation.services))
+    formData.append("res_end_date", accommodation.res_end_date)
+    formData.append("adult_price", String(accommodation.adult_price))
+    formData.append("child_price", String(accommodation.child_price))
+    //title, name ?
+    formData.append("image", accommodation.image)
+    return this.http.post<Accommodation>('/api/accommodations', formData);
   }
 
   getCreatedAccommodations(): Observable<Accommodation[]> {

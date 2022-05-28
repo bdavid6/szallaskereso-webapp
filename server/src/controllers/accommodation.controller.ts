@@ -4,8 +4,35 @@ import { Accommodation } from "../entities/Accommodation";
 import { Message } from "../entities/Message";
 import { Reservation } from "../entities/Reservation";
 import { Role, User } from "../entities/User";
+import multer from "multer";
 
 export const accommodationRouter = Router();
+
+const MIME_TYPE_MAP: any = {
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/jpg': 'jpg'
+}
+
+const config = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const isValid = MIME_TYPE_MAP[file.mimetype];
+        if (isValid) {
+            cb(null, "uploads");
+        } else {
+            console.log("nope")
+            let error = new Error("Nem támogatott formátum.")
+            cb(error, "uploads");
+        }
+    },
+    filename: (req, file, cb) => {
+        const name = file.originalname.toLowerCase().split(' ').join('-');
+        const extension = MIME_TYPE_MAP[file.mimetype];
+        cb(null, name + '-' + Date.now() + '.' + extension);
+    }
+});
+
+const upload = multer({ storage: config })
 
 accommodationRouter
     .use((req, res, next) => {
@@ -66,7 +93,10 @@ accommodationRouter
     })*/
 
     //szállás bejelentése
-    .post('/', async (req, res) => {
+    .post('/', upload.single("image"), async (req, res) => {
+        //kép elérése útvonala
+        const url = req.protocol + '://' + req.get("host");
+
         const accommodation = new Accommodation();
 
         //wrap(accommodation).assign(req.body, { em: req.orm.em });
@@ -74,15 +104,22 @@ accommodationRouter
         accommodation.phone_number = req.body.phone_number;
         accommodation.description = req.body.description;
         accommodation.information = req.body.information;
-        accommodation.services = req.body.services;
+        accommodation.services = JSON.parse(req.body.services);
         accommodation.adult_price = req.body.adult_price;
         accommodation.child_price = req.body.child_price;
+
+        //accommodation.image = url + "/uploads/" + req.file?.filename;
+        //dev mode
+        accommodation.image = req.protocol + '://' + 'localhost:3000' + "/uploads/" + req.file?.filename;
+
+        accommodation!.user = req.orm.em.getReference(User, req.user!.id);
         accommodation!.user = req.orm.em.getReference(User, req.user!.id);
 
+        //place: string átalakítása
         const place = req.body.place;
         const modifiedPlace = place.charAt(0).toUpperCase() + place.slice(1).toLowerCase();
         accommodation.place = modifiedPlace;
-
+        
         if (req.body.res_end_date) {
             accommodation.res_end_date = new Date(req.body.res_end_date);
         } else {

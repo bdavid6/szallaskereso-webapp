@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, Val
 import { DatePipe } from '@angular/common'
 import { AccommodationService } from '../core/services/accommodation.service';
 import { SearchService } from '../core/services/search.service';
+import { NotificationService } from '../core/services/notification.service';
 
 @Component({
   selector: 'app-create-accommodation',
@@ -11,6 +12,8 @@ import { SearchService } from '../core/services/search.service';
 })
 export class CreateAccommodationComponent implements OnInit {
   myDate = new Date(new Date().setMonth(new Date().getMonth() + 3))
+  imagePreview?: string;
+  validimage = false;
   accommodationForm!: FormGroup;
   servicesData = [
     { type: 'ingyen wifi' },
@@ -60,7 +63,8 @@ export class CreateAccommodationComponent implements OnInit {
     private fb: FormBuilder,
     private datepipe: DatePipe,
     private as: AccommodationService,
-    private ss: SearchService
+    private ss: SearchService,
+    private ns: NotificationService
   ) {
 
   }
@@ -76,6 +80,7 @@ export class CreateAccommodationComponent implements OnInit {
       res_end_date: [''],
       adult_price: ['', Validators.required],
       child_price: ['', Validators.required],
+      image: [null, [Validators.required]]
     });
   }
 
@@ -90,6 +95,27 @@ export class CreateAccommodationComponent implements OnInit {
     }
   }
 
+  onImagePick(event: Event) {
+    this.validimage = false;
+    const file = (event.target as HTMLInputElement).files![0];
+
+    if (file) {
+      if (file.type == ("image/jpeg" || "image/jpg")) {
+        setTimeout(() => {
+          this.validimage = true;
+        }, 350);
+      }
+    }
+
+    this.accommodationForm.patchValue({ image: file });
+    this.accommodationForm.get('image')?.updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    }
+    reader.readAsDataURL(file);
+  }
+
   createButton(formDirective: FormGroupDirective) {
     //date format ha nem üres
     if (this.accommodationForm.controls['res_end_date'].value !== "") {
@@ -98,7 +124,7 @@ export class CreateAccommodationComponent implements OnInit {
     }
     //send
     this.accommodationForm.markAllAsTouched();
-    if (this.accommodationForm.valid) {
+    if (this.accommodationForm.valid && this.validimage) {
       this.as.createAccommodation(this.accommodationForm.value).subscribe(
         (response) => { },
         (status: any) => {
@@ -111,6 +137,7 @@ export class CreateAccommodationComponent implements OnInit {
       formDirective.resetForm();
       this.accommodationForm.reset();
 
+      //this.ns.showNotification("success", "Sikeres foglalás", 1200);
     } else {
       return;
     }

@@ -54,7 +54,7 @@
                     <p class="name">{{(acco.name.length > 25) ? (acco.name | slice:0:25) + '...' : acco.name}}</p>
                     <p class="place">{{(acco.place.length > 30) ? (acco.place | slice:0:30) + '...' : acco.place}}</p>
                 </div>
-                <div><img src="./assets/img/budapest.jpg"></div>
+                <div><img src={{acco.image}}></div>
             </div>
 
             <div class="jobb" fxLayout="column" fxLayoutAlign="start">

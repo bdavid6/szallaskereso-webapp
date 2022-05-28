@@ -40,10 +40,51 @@ mat-card {
     max-height: 230px;
 }
 
-button {
-    margin-top: 80px;
+button[mat-raised-button] {
+    margin-top: 20px;
     margin-bottom: 20px;
     width: inherit;
     background-color: rgba(20, 104, 58, 0.877);
     color: white;
+}
+
+.imgprew {
+    margin-top: 20px;
+    min-height: 215px;
+    max-height: 215px;
+    min-width: 500px;
+    max-width: 500px;
+    border: 1px solid black;
+    margin-left: -160px;
+    border-radius: 5px;
+}
+
+.imgprew img {
+    //height: 100%;
+    min-height: 215px;
+    max-height: 215px;
+    min-width: 250px;
+    max-width: 250px;
+    border-radius: 5px;
+}
+
+button[mat-stroked-button] {
+    height: 40px;
+    margin-left: 85px;
+}
+
+p {
+    margin-top: 102px;
+    margin-left: 30px;
+    font-size: large;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+b {
+    font-weight: 500;
+}
+
+input[type="file"] {
+    visibility: hidden;
 }

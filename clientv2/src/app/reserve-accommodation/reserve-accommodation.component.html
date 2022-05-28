@@ -9,7 +9,7 @@
                     <p class="place">{{(this.accommodation!.place.length > 30) ? (this.accommodation!.place |
                         slice:0:30) + '...' : this.accommodation!.place}}</p>
                 </div>
-                <div><img src="./assets/img/budapest.jpg"></div>
+                <div><img src={{this.accommodation!.image}}></div>
             </div>
 
             <div class="jobb" fxLayout="column" fxLayoutAlign="start">
