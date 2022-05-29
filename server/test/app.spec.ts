@@ -56,12 +56,8 @@ describe('Szálláskereső', () => {
   describe('Message Controller', () => {
     let token1: string;
     let token2: string;
-    //let time: Date;
     let createdMessage: object;
     beforeAll(() => {
-      //time = new Date();
-      //jest.useFakeTimers('modern');
-      //jest.setSystemTime(time);
       createdMessage = {
         id: 1,
         text1: 'text1',
@@ -71,9 +67,6 @@ describe('Szálláskereső', () => {
         // valamint a teszt elején létrehozottakat is
       };
     });
-    /*afterAll(() => {
-      jest.useRealTimers();
-    });*/
 
     beforeEach(async () => {
       const loginResponse1 = await requestHandle.post('/auth/login').send(member1);
@@ -127,9 +120,6 @@ describe('Szálláskereső', () => {
     let createdSearch1: object;
     let createdSearch2: object;
     beforeAll(() => {
-      //time = new Date();
-      //jest.useFakeTimers('modern');
-      //jest.setSystemTime(time);
       createdSearch1 = [
         {
           id: 1,
@@ -220,12 +210,8 @@ describe('Szálláskereső', () => {
   describe('Reservation Controller', () => {
     let token1: string;
     let token2: string;
-    //let time: Date;
     let createdReservation: object;
     beforeAll(() => {
-      //time = new Date();
-      //jest.useFakeTimers('modern');
-      //jest.setSystemTime(time);
       createdReservation = {
         id: 1,
         start_date: '2022-05-08',

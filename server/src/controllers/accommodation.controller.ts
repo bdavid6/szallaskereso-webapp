@@ -42,11 +42,6 @@ accommodationRouter
         next();
     })
 
-    /*.get('', async (req, res) => {
-        const accommodations = await req.accommodationRepository!.findAll();
-        res.send(accommodations);
-    })*/
-
     //egy szállás lekérdezése
     .get('/:id', async (req, res) => {
         const id = parseInt(req.params.id);
@@ -71,26 +66,6 @@ accommodationRouter
         }
     })
 
-    /*.get('/confirm/:id', async (req, res) => {
-        const id = parseInt(req.params.id);
-        const accommodation = await req.accommodationRepository!.findOne({ id }, { populate: ['tags'] });
-        accommodation!.confirmed = true;
-        await req.accommodationRepository!.flush();
-
-        //res.sendStatus(200);
-        res.send(accommodation);
-    })*/
-
-    /*.get('/reserve/:id', async (req, res) => {
-        const id = parseInt(req.params.id);
-        const accommodation = await req.accommodationRepository!.findOne({ id }, { populate: ['tags', 'user'] });
-        accommodation!.reserved = true;
-        accommodation!.user = req.orm.em.getReference(User, req.user!.id);
-        await req.accommodationRepository!.flush();
-        
-        //res.sendStatus(200);
-        res.send(accommodation);
-    })*/
 
     //szállás bejelentése
     .post('/', upload.single("image"), async (req, res) => {
@@ -149,16 +124,6 @@ accommodationRouter
             res.sendStatus(200);
         }
     })
-
-    /*.post('/', async (req, res) => {
-        const accommodation = new Accommodation();
-        wrap(accommodation).assign(req.body, { em: req.orm.em });
-        // console.log(accommodation.id)
-        await req.accommodationRepository!.persistAndFlush(accommodation);
-        const id = accommodation.id;
-        const populatedSubject = req.accommodationRepository!.findOne({id: id});
-        res.send(accommodation);
-    })*/
 
     .delete('/:id', async (req, res) => {
         const id = parseInt(req.params.id);

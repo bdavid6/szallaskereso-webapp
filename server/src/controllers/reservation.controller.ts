@@ -16,12 +16,6 @@ reservationRouter
     })
 
     //user lefoglalt szállásainak lekérdezése
-    /*.get('', async (req, res) => {
-        const accommodations = await req.accommodationRepository!.find( { reservations: { user: { id: req.user!.id } } , confirmed: true })
-        res.send(accommodations);
-    })*/
-
-    //user lefoglalt szállásainak lekérdezése
     .get('', async (req, res) => {
         const reservations = await req.reservationRepository!.find({ user: req.user!.id }, { populate: ['accommodation'] })
         res.send(reservations);
@@ -98,14 +92,3 @@ reservationRouter
             }
         }
     })
-
-    //foglalás visszamondás, accommodation id alapján, a usert kiolvassa
-/*.delete('/accommodation/:id', async (req, res) => {
-    const id = parseInt(req.params.id);
-    const reservation = await req.reservationRepository!.nativeDelete({ user: req.user!.id, accommodation: id });
-    if (reservation) {
-        res.sendStatus(200);
-    } else {
-        res.sendStatus(409);
-    }
-})*/

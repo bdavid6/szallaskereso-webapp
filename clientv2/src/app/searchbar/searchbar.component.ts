@@ -69,18 +69,6 @@ export class SearchbarComponent implements OnInit {
     });
   }
 
-  /*fetchData(): void {
-    this.ss.getAccommodationsBySearch('', '').subscribe(
-      (response) => {
-        for (let i = 0; i < response.length; i++) {
-          this.ss.options.push(response[i].place)
-        }
-      },
-      (error) => {
-        console.log(error);
-      });
-  }*/
-
   //filterForm onchange
   onChange(services: string, isChecked: boolean) {
     const checkedServices = (this.filterForm.controls.services as FormArray);

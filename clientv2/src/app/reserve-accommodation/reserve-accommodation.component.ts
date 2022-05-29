@@ -75,46 +75,6 @@ export class ReserveAccommodationComponent implements OnInit {
   }
 
   reserveButton(formDirective: FormGroupDirective): void {
-    /*const dialogRef = this.dialog.open(PaymentComponent, {
-      height: '380px',
-    });
-    let transformedStartDate = this.datepipe.transform(this.reserveForm.controls['start_date'].value, 'yyyy-MM-dd');
-    this.reserveForm.controls['start_date'].setValue(transformedStartDate);
-    let transformedEndDate = this.datepipe.transform(this.reserveForm.controls['end_date'].value, 'yyyy-MM-dd');
-    this.reserveForm.controls['end_date'].setValue(transformedEndDate);
-
-    //send
-    this.reserveForm.markAllAsTouched();
-    if (this.reserveForm.valid) {
-      this.rs.reserveAccommodation(this.reserveForm.value, this.accommodation!.id).subscribe(
-        (response) => { },
-        (status: any) => {
-          if(status.status == 405) {
-            console.log(status.status);
-            this.ns.showNotification("error", "Ez a te szállásod", 1200);
-          }
-          if(status.status == 200) {
-            console.log(status.status);
-            this.ns.showNotification("success", "Sikeres foglalás", 1200);
-            this.router.navigate(['reserved-accommodations']);
-          }
-          if(status.status == 409) {
-            console.log(status.status);
-            this.ns.showNotification("error", "Már foglalát időpontot", 1200);
-            this.router.navigate(['reserved-accommodations']);
-          }
-        });
-
-      //clear
-      formDirective.resetForm();
-      this.reserveForm.reset();
-      this.cardnum = '';
-      this.carddate = '';
-      this.cardcvc = '';
-
-    } else {
-      return;
-    }*/
     let transformedStartDate = this.datepipe.transform(this.reserveForm.controls['start_date'].value, 'yyyy-MM-dd');
     this.reserveForm.controls['start_date'].setValue(transformedStartDate);
     let transformedEndDate = this.datepipe.transform(this.reserveForm.controls['end_date'].value, 'yyyy-MM-dd');
