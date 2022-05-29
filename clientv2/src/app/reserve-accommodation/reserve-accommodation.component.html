@@ -102,7 +102,8 @@
                     this.accommodation!.adult_price * adults.value)}} HUF</p>
                 </div>
             </div>
-            <button (click)="fakebutton.click()" class="reserve" mat-raised-button>TOVÁBB<mat-icon class="arrow" aria-hidden="true">east</mat-icon></button>
+            <button *ngIf="!this.ahs.isAdmin" (click)="fakebutton.click()" class="reserve" mat-raised-button>TOVÁBB<mat-icon class="arrow" aria-hidden="true">east</mat-icon></button>
+            <button *ngIf="this.ahs.isAdmin" (click)="message()" class="reserve" mat-raised-button>TOVÁBB<mat-icon class="arrow" aria-hidden="true">east</mat-icon></button>
         </div>
     </div>
 </div>

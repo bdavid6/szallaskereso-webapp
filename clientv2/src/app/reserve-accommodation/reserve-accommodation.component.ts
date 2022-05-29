@@ -8,6 +8,7 @@ import { ReservationService } from '../core/services/reservation.service';
 import { NotificationService } from '../core/services/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentComponent } from '../payment/payment.component';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-reserve-accommodation',
@@ -52,7 +53,8 @@ export class ReserveAccommodationComponent implements OnInit {
     private rs: ReservationService,
     private ns: NotificationService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public ahs: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -160,6 +162,10 @@ export class ReserveAccommodationComponent implements OnInit {
     } else {
       return;
     }
+  }
+
+  message() {
+    this.ns.showNotification("error", "Adminoknak nem elérhető", 1000);
   }
 
   backButton() {

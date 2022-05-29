@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common'
 import { AccommodationService } from '../core/services/accommodation.service';
 import { SearchService } from '../core/services/search.service';
 import { NotificationService } from '../core/services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-accommodation',
@@ -64,7 +65,8 @@ export class CreateAccommodationComponent implements OnInit {
     private datepipe: DatePipe,
     private as: AccommodationService,
     private ss: SearchService,
-    private ns: NotificationService
+    private ns: NotificationService,
+    private router: Router
   ) {
 
   }
@@ -136,8 +138,12 @@ export class CreateAccommodationComponent implements OnInit {
       //clear
       formDirective.resetForm();
       this.accommodationForm.reset();
+      //this.imagePreview = undefined;
 
-      //this.ns.showNotification("success", "Sikeres foglalás", 1200);
+      this.ns.showNotification("success", "Sikeres kitöltés", 1500);
+      setTimeout(() => {
+        this.router.navigate(['manage-accommodations']);
+      }, 400);
     } else {
       return;
     }

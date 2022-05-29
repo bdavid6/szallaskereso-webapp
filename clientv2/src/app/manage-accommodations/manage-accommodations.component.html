@@ -1,4 +1,11 @@
-<div *ngIf="accommodations?.length != 0;else notfound" class="body" fxLayout="column" fxLayoutAlign="start center"
+<div *ngIf="accommodations?.length == 0;else found">
+    <div class="nf" fxLayout="column" fxLayoutAlign="center start">
+        <h1>Ön még nem <b>Partner.</b></h1>
+        <h1>Kérjük várjon amíg ellenőrzésre kerülnek a beküldött szállásai.</h1>
+    </div>
+</div>
+<ng-template #found>
+    <div class="body" fxLayout="column" fxLayoutAlign="start center"
     fxLayoutGap="20px">
     <h1><b>Kiadott szállásaim és foglalások</b></h1>
     <div class="text">
@@ -59,8 +66,4 @@
     <button (click)="changeStatus(statusControl.value?.id)" mat-raised-button>Státusz
         változtatása</button>
 </div>
-<ng-template #notfound>
-    <div class="nf" fxLayoutAlign="center start">
-        <h1>Ön még nem <b>Partner.</b></h1>
-    </div>
 </ng-template>
